@@ -1,8 +1,11 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/Login";
+
 function App() {
   return (
-    <>
-      <h1>hello</h1>
-    </>
+    <div className="h-screen">
+      <Login />
+    </div>
   );
 }
 
