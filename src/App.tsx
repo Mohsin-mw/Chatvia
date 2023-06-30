@@ -1,10 +1,10 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/Login";
+import { RouterProvider } from "react-router-dom";
+import routes from "./routes/routes.tsx";
 
 function App() {
   return (
     <div className="h-screen">
-      <Login />
+      <RouterProvider router={routes} />
     </div>
   );
 }
