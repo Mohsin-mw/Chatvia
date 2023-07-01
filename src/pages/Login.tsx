@@ -1,8 +1,19 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import useLoader from "../hooks/useLoader";
+import { useEffect } from "react";
+import { toggleLoading } from "../store/appSlice";
 const Login = () => {
+  const dispatch = useDispatch();
+  const HandlerLoader = () => {
+    useLoader(dispatch);
+  };
+  useEffect(() => {
+    dispatch(toggleLoading(true));
+    HandlerLoader();
+  }, []);
   return (
     <>
       <div className="flex min-h-full w-full">
