@@ -1,5 +1,6 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -17,12 +18,12 @@ const Login = () => {
               </h2>
               <p className="mt-2 text-sm text-gray-600">
                 Or{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/signup"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   create a brand new account today
-                </a>
+                </Link>
               </p>
             </div>
 
