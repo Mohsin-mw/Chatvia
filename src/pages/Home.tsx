@@ -9,7 +9,9 @@ import {
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-
+import Searchbar from "../components/Searchbar";
+import Feeds from "../components/Feeds";
+import Avatar from "../components/Avatars";
 const user = {
   name: "Emily Selman",
   email: "emily.selman@example.com",
@@ -220,7 +222,21 @@ const Home = () => {
 
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden lg:order-first lg:block lg:flex-shrink-0">
-              <div className="relative flex h-full w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white"></div>
+              <div className="relative flex h-full w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white">
+                <div className="flex flex-col space-y-5 pt-5 px-5">
+                  <div className="text-sm">Chats</div>
+                  <Searchbar />
+                  <div className="flex flex-row justify-around">
+                    <Avatar />
+                    <Avatar />
+                    <Avatar />
+                  </div>
+                  <div className="flex flex-col items-start justify-start">
+                    <div className="my-3 text-sm">Recent</div>
+                    <Feeds />
+                  </div>
+                </div>
+              </div>
             </aside>
           </main>
         </div>
