@@ -70,7 +70,7 @@ export default function Feeds() {
           >
             <div className="flex space-x-3">
               <img
-                className="h-6 w-6 rounded-full"
+                className="h-6 w-6 rounded-full object-cover"
                 src={activityItem.person.imageUrl}
                 alt=""
               />
