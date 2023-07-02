@@ -12,6 +12,8 @@ import {
 import Searchbar from "../components/Searchbar";
 import Feeds from "../components/Feeds";
 import Avatar from "../components/Avatars";
+import logo from "../assets/logo.svg";
+
 const user = {
   name: "Emily Selman",
   email: "emily.selman@example.com",
@@ -142,14 +144,10 @@ const Home = () => {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:flex lg:flex-shrink-0">
           <div className="flex w-20 flex-col">
-            <div className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-indigo-600">
+            <div className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-neutral">
               <div className="flex-1">
-                <div className="flex items-center justify-center bg-indigo-700 py-4">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                    alt="Your Company"
-                  />
+                <div className="flex items-center justify-center bg-indigo-600 py-4">
+                  <img className="h-8 w-auto" src={logo} alt="Your Company" />
                 </div>
                 <nav
                   aria-label="Sidebar"
@@ -159,9 +157,12 @@ const Home = () => {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-indigo-700"
+                      className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group "
                     >
-                      <item.icon className="h-6 w-6" aria-hidden="true" />
+                      <item.icon
+                        className="h-6 w-6  group-hover:text-primary-shade-2 duration-200"
+                        aria-hidden="true"
+                      />
                       <span className="sr-only">{item.name}</span>
                     </a>
                   ))}
@@ -227,9 +228,18 @@ const Home = () => {
                   <div className="text-sm">Chats</div>
                   <Searchbar />
                   <div className="flex flex-row justify-around">
-                    <Avatar />
-                    <Avatar />
-                    <Avatar />
+                    <Avatar
+                      name="Tim Cook"
+                      image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    />
+                    <Avatar
+                      name="Elena Joy"
+                      image="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                    />
+                    <Avatar
+                      name="Selena Gomez"
+                      image="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                    />
                   </div>
                   <div className="flex flex-col items-start justify-start">
                     <div className="my-3 text-sm">Recent</div>

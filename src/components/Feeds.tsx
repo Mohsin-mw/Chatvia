@@ -45,9 +45,12 @@ const activityItems = [
 export default function Feeds() {
   return (
     <div>
-      <ul role="list" className="divide-y divide-gray-200">
+      <ul role="list" className="">
         {activityItems.map((activityItem) => (
-          <li key={activityItem.id} className="py-4">
+          <li
+            key={activityItem.id}
+            className="py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer"
+          >
             <div className="flex space-x-3">
               <img
                 className="h-6 w-6 rounded-full"

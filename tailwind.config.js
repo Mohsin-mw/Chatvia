@@ -17,16 +17,18 @@
 
 module.exports = {
   content: [
-    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
     "./{src,public}/**/*.{html,js,ts,jsx,tsx}",
     "./src/Pages/*.tsx",
     "./src/Components/*.tsx",
     { raw: "<div class=min-h-screen", extension: "html" },
   ],
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
   theme: {
     colors: {
-      primary: "#7269ef",
+      dark: "#1d232a",
       "primary-shade-2": "#6159cb",
     },
   },
