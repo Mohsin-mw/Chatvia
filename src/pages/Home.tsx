@@ -13,6 +13,9 @@ import Searchbar from "../components/Searchbar";
 import Feeds from "../components/Feeds";
 import Avatar from "../components/Avatars";
 import logo from "../assets/logo.svg";
+import ChatUserBanner from "../components/ChatUserBanner";
+import SendMessage from "../components/SendMessage";
+import MessageScreen from "../components/MessageScreen";
 
 const user = {
   name: "Emily Selman",
@@ -218,7 +221,11 @@ const Home = () => {
               <h1 id="primary-heading" className="sr-only">
                 Account
               </h1>
-              {/* Your content */}
+              <ChatUserBanner />
+              <div className="flex flex-col h-full">
+                <MessageScreen />
+                <SendMessage />
+              </div>
             </section>
 
             {/* Secondary column (hidden on smaller screens) */}
