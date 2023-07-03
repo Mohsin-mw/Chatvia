@@ -12,6 +12,7 @@ import PhoneSideBar from "../components/PhoneSideBar";
 import PhoneTopBar from "../components/PhoneTopBar";
 import ChatFeedLeft from "../components/ChatFeedLeft";
 import MainMessageArea from "../components/MainMessageArea";
+import { Outlet } from "react-router-dom";
 
 const user = {
   name: "Emily Selman",
@@ -42,10 +43,7 @@ const Home = () => {
         <Sidebar user={user} navigation={navigation} />
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} />
-          <main className="flex flex-1 overflow-hidden">
-            <ChatFeedLeft />
-            <MainMessageArea />
-          </main>
+          <Outlet />
         </div>
       </div>
     </>
