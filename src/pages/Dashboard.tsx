@@ -1,12 +1,11 @@
-import React from "react";
-import ChatFeedLeft from "../components/ChatFeedLeft";
-import MainMessageArea from "../components/MainMessageArea";
+import MessagesDashboard from "../components/MessagesDashboard";
+import SideChatFeed from "../components/SideChatFeed";
 
 const Dashboard = () => {
   return (
     <main className="flex flex-1 overflow-hidden">
-      <ChatFeedLeft />
-      <MainMessageArea />
+      <MessagesDashboard />
+      <SideChatFeed />
     </main>
   );
 };

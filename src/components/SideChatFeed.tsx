@@ -2,7 +2,7 @@ import Avatar from "./Avatars";
 import Feeds from "./Feeds";
 import Searchbar from "./Searchbar";
 
-const MainMessageArea = () => {
+const SideChatFeed = () => {
   return (
     <aside className="hidden lg:order-first lg:block lg:flex-shrink-0">
       <div className="relative flex h-full w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white">
@@ -33,4 +33,4 @@ const MainMessageArea = () => {
   );
 };
 
-export default MainMessageArea;
+export default SideChatFeed;

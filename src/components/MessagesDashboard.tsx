@@ -2,7 +2,7 @@ import ChatUserBanner from "./ChatUserBanner";
 import MessageScreen from "./MessageScreen";
 import SendMessage from "./SendMessage";
 
-const ChatFeedLeft = () => {
+const MessagesDashboard = () => {
   return (
     <section
       aria-labelledby="primary-heading"
@@ -17,4 +17,4 @@ const ChatFeedLeft = () => {
   );
 };
 
-export default ChatFeedLeft;
+export default MessagesDashboard;
