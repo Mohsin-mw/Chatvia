@@ -1,3 +1,12 @@
+import {
+  Bars3Icon,
+  BookmarkSquareIcon,
+  FireIcon,
+  HomeIcon,
+  InboxIcon,
+  UserIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common.types";
 

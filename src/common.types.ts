@@ -13,4 +13,7 @@ export interface NavigationItem {
 export interface NavigationProps {
   user: User;
   navigation: NavigationItem[];
+  logo?: string;
+  mobileMenuOpen?: boolean;
+  setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
