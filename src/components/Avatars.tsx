@@ -6,7 +6,7 @@ interface Props {
 const Avatar = ({ name, image }: Props) => {
   return (
     <a href="#" className="group block flex-shrink-0">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center text-center">
         <div>
           <img
             className="object-cover inline-block h-9 w-9 rounded-full"
