@@ -1,4 +1,4 @@
-import Message from "./MEssage";
+import Message from "./Message";
 const MessageScreen = () => {
   const messages = [
     {
