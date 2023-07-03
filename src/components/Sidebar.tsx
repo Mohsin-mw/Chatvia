@@ -31,7 +31,7 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
             </nav>
           </div>
           <div className="flex flex-shrink-0 pb-5">
-            <a href="#" className="w-full flex-shrink-0">
+            <Link to="/profile" className="w-full flex-shrink-0">
               <img
                 className="mx-auto block h-10 w-10 rounded-full"
                 src={user.imageUrl}
@@ -41,7 +41,7 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
                 <p>{user.name}</p>
                 <p>Account settings</p>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

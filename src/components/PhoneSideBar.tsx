@@ -16,14 +16,8 @@ const PhoneSideBar = ({
   logo,
   mobileMenuOpen,
   setMobileMenuOpen,
+  navigation,
 }: NavigationProps) => {
-  const navigation = [
-    { name: "Home", href: "/", icon: HomeIcon },
-    { name: "Trending", href: "#", icon: FireIcon },
-    { name: "Bookmarks", href: "#", icon: BookmarkSquareIcon },
-    { name: "Messages", href: "#", icon: InboxIcon },
-    { name: "Profile", href: "/profile", icon: UserIcon },
-  ];
   return (
     <Transition.Root show={mobileMenuOpen} as={Fragment}>
       <Dialog
@@ -102,7 +96,7 @@ const PhoneSideBar = ({
                 </nav>
               </div>
               <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                <a href="#" className="group block flex-shrink-0">
+                <Link to="/profile" className="group block flex-shrink-0">
                   <div className="flex items-center">
                     <div>
                       <img
@@ -120,7 +114,7 @@ const PhoneSideBar = ({
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             </Dialog.Panel>
           </Transition.Child>
