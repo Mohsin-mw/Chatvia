@@ -8,6 +8,7 @@ import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
 import ViewProfile from "../pages/ViewProfile";
 import Users from "../pages/Users";
+import ErrorPage from "../pages/ErrorPage";
 
 const routes = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/",
+    errorElement: <ErrorPage />,
     element: (
       <Protected>
         <Home />

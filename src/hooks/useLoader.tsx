@@ -6,7 +6,7 @@ type AppDispatch = Dispatch<Action>;
 const useLoader = (dispatch: AppDispatch) => {
   setTimeout(() => {
     dispatch(toggleLoading(false));
-  }, 3000);
+  }, 1000);
 };
 
 export default useLoader;
