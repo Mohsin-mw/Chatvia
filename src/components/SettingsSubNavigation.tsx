@@ -86,8 +86,8 @@ const SettingsSubNavigation = () => {
             href={item.href}
             className={classNames(
               item.current
-                ? "bg-blue-50 bg-opacity-50"
-                : "hover:bg-blue-50 hover:bg-opacity-50",
+                ? "bg-neutral bg-opacity-50"
+                : "hover:bg-neutral hover:bg-opacity-50 duration-200",
               "flex p-6 border-b border-blue-gray-200"
             )}
             aria-current={item.current ? "page" : undefined}

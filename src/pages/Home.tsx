@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store/store";
+import { toggleLoading } from "../store/appSlice";
+import useLoader from "../hooks/useLoader";
 import {
   BookmarkSquareIcon,
   FireIcon,
@@ -10,9 +14,8 @@ import logo from "../assets/logo.svg";
 import Sidebar from "../components/Sidebar";
 import PhoneSideBar from "../components/PhoneSideBar";
 import PhoneTopBar from "../components/PhoneTopBar";
-import ChatFeedLeft from "../components/ChatFeedLeft";
-import MainMessageArea from "../components/MainMessageArea";
 import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const user = {
   name: "Emily Selman",
@@ -30,6 +33,18 @@ const navigation = [
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigationPath = useLocation();
+  console.log(navigationPath);
+
+  const dispatch = useDispatch();
+  const HandlerLoader = () => {
+    useLoader(dispatch);
+  };
+  useEffect(() => {
+    dispatch(toggleLoading(true));
+    HandlerLoader();
+  }, [navigationPath.pathname]);
+
   return (
     <>
       <div className="flex h-full">

@@ -1,12 +1,4 @@
-import {
-  Bars3Icon,
-  BookmarkSquareIcon,
-  FireIcon,
-  HomeIcon,
-  InboxIcon,
-  UserIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common.types";
 
@@ -24,9 +16,9 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
               className="flex flex-col items-center space-y-3 py-6"
             >
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group "
                 >
                   <item.icon
@@ -34,7 +26,7 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
                     aria-hidden="true"
                   />
                   <span className="sr-only">{item.name}</span>
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

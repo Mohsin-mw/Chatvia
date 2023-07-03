@@ -15,7 +15,7 @@ const MessageScreen = () => {
   return (
     <div className="grow py-5 px-5">
       {messages.map((message) => (
-        <Message message={message} />
+        <Message key={message.id} message={message} />
       ))}
     </div>
   );
