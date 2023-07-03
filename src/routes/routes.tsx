@@ -6,6 +6,7 @@ import Protected from "../components/Protected";
 import Unauthorize from "../components/Unauthorize";
 import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
+import ViewProfile from "../pages/ViewProfile";
 
 const routes = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+      },
+      {
+        path: "/viewprofile",
+        element: <ViewProfile />,
       },
       {
         path: "/profile",

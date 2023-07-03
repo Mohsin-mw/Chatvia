@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
+
 interface Props {
   name: string;
   image: string;
 }
 
 const Avatar = ({ name, image }: Props) => {
+  const state = { name, image };
   return (
-    <a href="#" className="group block flex-shrink-0">
+    <Link to="/viewprofile" state={state} className="group block flex-shrink-0">
       <div className="flex flex-col items-center justify-center text-center">
         <div>
           <img
@@ -22,7 +25,7 @@ const Avatar = ({ name, image }: Props) => {
           </p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
