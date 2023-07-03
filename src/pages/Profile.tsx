@@ -1,72 +1,22 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-  
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          'blue-gray': colors.blueGray,
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import {
-  BanknotesIcon,
-  Bars3Icon,
-  BellIcon,
-  BookmarkSquareIcon,
-  CogIcon,
-  FireIcon,
-  HomeIcon,
-  InboxIcon,
-  KeyIcon,
-  MagnifyingGlassCircleIcon,
-  PhotoIcon,
-  SquaresPlusIcon,
-  UserIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 import SettingsSubNavigation from "../components/SettingsSubNavigation";
-
-const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon },
-  { name: "Trending", href: "#", icon: FireIcon },
-  { name: "Bookmarks", href: "#", icon: BookmarkSquareIcon },
-  { name: "Messages", href: "#", icon: InboxIcon },
-  { name: "Profile", href: "#", icon: UserIcon },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
+import { useNavigate } from "react-router-dom";
 export default function Profile() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="flex flex-1 flex-col overflow-y-auto xl:overflow-hidden">
-      {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
         className="border-b border-blue-gray-200 bg-white xl:hidden"
       >
         <div className="mx-auto flex max-w-3xl items-start py-3 px-4 sm:px-6 lg:px-8">
-          <a
-            href="#"
+          <button
+            onClick={goBack}
             className="-ml-1 inline-flex items-center space-x-3 text-sm font-medium text-blue-gray-900"
           >
             <ChevronLeftIcon
@@ -74,7 +24,7 @@ export default function Profile() {
               aria-hidden="true"
             />
             <span>Settings</span>
-          </a>
+          </button>
         </div>
       </nav>
 

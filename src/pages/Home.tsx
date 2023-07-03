@@ -57,7 +57,7 @@ const Home = () => {
         />
         <Sidebar user={user} navigation={navigation} />
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} />
+          <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} logo={logo} />
           <Outlet />
         </div>
       </div>
