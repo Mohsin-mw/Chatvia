@@ -9,6 +9,7 @@ import {
   HomeIcon,
   InboxIcon,
   UserIcon,
+  MagnifyingGlassCircleIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.svg";
 import Sidebar from "../components/Sidebar";
@@ -25,9 +26,7 @@ const user = {
 };
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
-  { name: "Trending", href: "#", icon: FireIcon },
-  { name: "Bookmarks", href: "#", icon: BookmarkSquareIcon },
-  { name: "Messages", href: "#", icon: InboxIcon },
+  { name: "Users", href: "/users", icon: MagnifyingGlassCircleIcon },
   { name: "Profile", href: "/profile", icon: UserIcon },
 ];
 

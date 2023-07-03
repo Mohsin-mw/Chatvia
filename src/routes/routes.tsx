@@ -7,6 +7,7 @@ import Unauthorize from "../components/Unauthorize";
 import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
 import ViewProfile from "../pages/ViewProfile";
+import Users from "../pages/Users";
 
 const routes = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const routes = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
       },
     ],
   },

@@ -21,11 +21,6 @@ import {
 } from "@heroicons/react/20/solid";
 import { useLocation, useNavigate } from "react-router-dom";
 
-interface Props {
-  name: string;
-  image: string;
-}
-
 const tabs = [{ name: "Profile", href: "#", current: true }];
 const profile = {
   name: "Ricardo Cooper",
@@ -53,7 +48,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ViewProfile({ name, image }: Props) {
+export default function ViewProfile() {
   const navigate = useNavigate();
   const location = useLocation();
   const propsData = location.state;
