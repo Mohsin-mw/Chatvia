@@ -24,7 +24,7 @@ export default function Profile() {
               className="h-5 w-5 text-blue-gray-400"
               aria-hidden="true"
             />
-            <span>Settings</span>
+            <span>Back</span>
           </button>
         </div>
       </nav>

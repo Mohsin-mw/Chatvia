@@ -100,7 +100,7 @@ const PhoneSideBar = ({
                   <div className="flex items-center">
                     <div>
                       <img
-                        className="inline-block h-10 w-10 rounded-full"
+                        className="inline-block h-10 w-10 rounded-full border "
                         src={user.imageUrl}
                         alt=""
                       />
