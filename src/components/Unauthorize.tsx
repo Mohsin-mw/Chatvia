@@ -5,9 +5,8 @@ type Props = {
   children: JSX.Element;
 };
 const Unauthorize: React.FC<Props> = ({ children }) => {
-  const app = useSelector((state: RootState) => state.app);
-  const user = app.user;
-  return !user ? children : <Navigate to={"/"} replace />;
+  const userAuthenticated = useSelector((state: RootState) => state.user);
+  return !userAuthenticated.user ? children : <Navigate to={"/"} replace />;
 };
 
 export default Unauthorize;

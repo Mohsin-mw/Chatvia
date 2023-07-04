@@ -1,19 +1,63 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import useLoader from "../hooks/useLoader";
-import { useEffect } from "react";
-import { toggleLoading } from "../store/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import {
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../services/firebase";
+import { setUser } from "../store/userSlice";
+
+interface User {
+  uid: string;
+  displayName: string | null;
+  email: string | null;
+  photoUrl: string | null;
+}
+
 const Login = () => {
+  const app = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
-  const HandlerLoader = () => {
-    useLoader(dispatch);
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user: User = {
+        uid: result.user?.uid || "",
+        displayName: result.user?.displayName || null,
+        email: result.user?.email || null,
+        photoUrl: result.user?.photoURL || null,
+      };
+      if (user.uid) {
+        dispatch(setUser(user));
+      } else {
+        console.log("User data not available");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  useEffect(() => {
-    dispatch(toggleLoading(true));
-    HandlerLoader();
-  }, []);
+  const signInHandler = async () => {
+    try {
+      await signInWithGoogle();
+
+      // Retrieve the user data after the redirect
+      const userCredential = await getRedirectResult(auth);
+      console.log("hello");
+
+      console.log(userCredential);
+
+      // Store the user data in the Redux store
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full w-full">
@@ -47,24 +91,38 @@ const Login = () => {
 
                   <div className="mt-1 grid grid-cols-3 gap-3">
                     <div>
-                      <a
-                        href="#"
+                      <button
+                        onClick={signInHandler}
                         className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                       >
                         <span className="sr-only">Sign in with Facebook</span>
                         <svg
                           className="h-5 w-5"
-                          aria-hidden="true"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0,0,256,256"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z"
-                            clipRule="evenodd"
-                          />
+                          <g
+                            fill="#d1d5db"
+                            fillRule="nonzero"
+                            stroke="none"
+                            strokeWidth="1"
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            strokeMiterlimit="10"
+                            strokeDasharray=""
+                            strokeDashoffset="0"
+                            fontFamily="none"
+                            fontWeight="none"
+                            fontSize="none"
+                            textAnchor="none"
+                          >
+                            <g transform="scale(5.12,5.12)">
+                              <path d="M25.99609,48c-12.68359,0 -23.00391,-10.31641 -23.00391,-23c0,-12.68359 10.32031,-23 23.00391,-23c5.74609,0 11.24609,2.12891 15.49219,5.99609l0.77344,0.70703l-7.58594,7.58594l-0.70312,-0.60156c-2.22656,-1.90625 -5.05859,-2.95703 -7.97656,-2.95703c-6.76562,0 -12.27344,5.50391 -12.27344,12.26953c0,6.76563 5.50781,12.26953 12.27344,12.26953c4.87891,0 8.73438,-2.49219 10.55078,-6.73828h-11.55078v-10.35547l22.55078,0.03125l0.16797,0.79297c1.17578,5.58203 0.23438,13.79297 -4.53125,19.66797c-3.94531,4.86328 -9.72656,7.33203 -17.1875,7.33203z"></path>
+                            </g>
+                          </g>
                         </svg>
-                      </a>
+                      </button>
                     </div>
 
                     <div>
