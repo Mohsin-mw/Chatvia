@@ -2,13 +2,57 @@ import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleLoading } from "../store/appSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useLoader from "../hooks/useLoader";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { setUser } from "../store/userSlice";
+
+import { auth } from "../services/firebase";
+import { User } from "../common.types";
 const Signup = () => {
   const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const HandlerLoader = () => {
     useLoader(dispatch);
   };
+  const handleSignup = async (
+    event: React.FormEvent<HTMLFormElement>,
+    email: string,
+    password: string
+  ) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const result = userCredential.user;
+
+      await updateProfile(result, {
+        displayName: "Anonymous",
+        photoURL:
+          "https://png.pngtree.com/png-vector/20220607/ourmid/pngtree-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background-png-image_4853791.png",
+      });
+
+      const user: User = {
+        uid: result?.uid || "",
+        name: result?.displayName || null,
+        email: result?.email || null,
+        ImageUrl: result?.photoURL || null,
+      };
+      if (user.uid) {
+        dispatch(setUser(user));
+      } else {
+        console.log("User data not available");
+      }
+    } catch (error) {
+      console.log("Signup error:", error);
+    }
+  };
+
   useEffect(() => {
     dispatch(toggleLoading(true));
     HandlerLoader();
@@ -33,7 +77,13 @@ const Signup = () => {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white border border-2 border-primary py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" action="#" method="POST">
+          <form
+            className="space-y-6"
+            action="#"
+            method="POST"
+            onSubmit={(event) => handleSignup(event, email, password)}
+          >
+            {/* Email input */}
             <div>
               <label
                 htmlFor="email"
@@ -48,11 +98,14 @@ const Signup = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 />
               </div>
             </div>
 
+            {/* Password input */}
             <div>
               <label
                 htmlFor="password"
@@ -67,37 +120,17 @@ const Signup = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-primary text-primary focus:ring-primary"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
+            {/* Remember me and Forgot password */}
+            {/* ... */}
 
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
+            {/* Signup button */}
             <div>
               <button
                 type="submit"
