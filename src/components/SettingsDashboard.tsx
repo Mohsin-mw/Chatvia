@@ -70,7 +70,7 @@ const SettingsDashboard = () => {
                   name="username"
                   id="username"
                   autoComplete="username"
-                  defaultValue="lisamarie"
+                  defaultValue={user?.name}
                   className="input w-full rounded-l-none  max-w-xs bg-neutral  focus:border-primary"
                 />
               </div>
