@@ -7,15 +7,25 @@ import {
   SquaresPlusIcon,
   MagnifyingGlassCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const subNavigation = [
   {
     name: "Account",
     description:
-      "Ullamcorper id at suspendisse nec id volutpat vestibulum enim. Interdum blandit.",
-    href: "#",
+      "It allows you to modify personal information, update preferences, and configure various aspects of your account",
+    href: "/profile/settings",
     icon: CogIcon,
-    current: true,
+    current: false,
+  },
+  {
+    name: "Logout",
+    description:
+      "By selecting this option, you will be signed out and redirected to the login page",
+    href: "/profile/logout",
+    icon: BellIcon,
+    current: false,
   },
   {
     name: "Notifications",
@@ -71,6 +81,11 @@ function classNames(...classes) {
 }
 
 const SettingsSubNavigation = () => {
+  const [selectedItem, setSelectedItem] = useState("");
+
+  const handleItemClick = (name) => {
+    setSelectedItem(name);
+  };
   return (
     <nav
       aria-label="Sections"
@@ -81,16 +96,17 @@ const SettingsSubNavigation = () => {
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto">
         {subNavigation.map((item) => (
-          <a
+          <Link
             key={item.name}
-            href={item.href}
+            to={item.href}
             className={classNames(
-              item.current
-                ? "bg-neutral bg-opacity-50"
-                : "hover:bg-neutral hover:bg-opacity-50 duration-200",
-              "flex p-6 border-b border-blue-gray-200"
+              "flex p-6",
+              selectedItem === item.name
+                ? "bg-neutral"
+                : "hover:bg-neutral hover:bg-opacity-50 duration-200"
             )}
             aria-current={item.current ? "page" : undefined}
+            onClick={() => handleItemClick(item.name)}
           >
             <item.icon
               className="-mt-0.5 h-6 w-6 flex-shrink-0 text-blue-gray-400"
@@ -100,7 +116,7 @@ const SettingsSubNavigation = () => {
               <p className="font-medium text-blue-gray-900">{item.name}</p>
               <p className="mt-1 text-blue-gray-500">{item.description}</p>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </nav>

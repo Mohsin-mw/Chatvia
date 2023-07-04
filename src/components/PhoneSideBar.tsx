@@ -101,7 +101,7 @@ const PhoneSideBar = ({
                     <div>
                       <img
                         className="inline-block h-10 w-10 rounded-full border "
-                        src={user.imageUrl}
+                        src={user.ImageUrl}
                         alt=""
                       />
                     </div>

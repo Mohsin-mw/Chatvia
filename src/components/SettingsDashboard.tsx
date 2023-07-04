@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+
 const SettingsDashboard = () => {
+  const { user } = useSelector((state: RootState) => state.user);
   return (
     <div className="flex-1 xl:overflow-y-auto">
       <div className="mx-auto max-w-3xl py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
@@ -82,7 +86,7 @@ const SettingsDashboard = () => {
               <div className="mt-1 flex items-center">
                 <img
                   className="inline-block h-12 w-12 rounded-full"
-                  src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2.5&w=256&h=256&q=80"
+                  src={user.ImageUrl}
                   alt=""
                 />
                 <div className="ml-4 flex">

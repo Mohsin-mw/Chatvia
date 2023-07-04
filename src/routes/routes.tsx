@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Home from "../pages/Home";
@@ -9,6 +9,8 @@ import Dashboard from "../pages/Dashboard";
 import ViewProfile from "../pages/ViewProfile";
 import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
+import SettingsDashboard from "../components/SettingsDashboard";
+import LogOut from "../components/LogOut";
 
 const routes = createBrowserRouter([
   {
@@ -47,6 +49,20 @@ const routes = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to="/profile/settings" replace={true} />,
+          },
+          {
+            path: "settings",
+            element: <SettingsDashboard />,
+          },
+          {
+            path: "logout",
+            element: <LogOut />,
+          },
+        ],
       },
       {
         path: "/users",

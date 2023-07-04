@@ -1,26 +1,13 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  signInWithPopup,
-} from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { setUser } from "../store/userSlice";
-
-interface User {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-  photoUrl: string | null;
-}
+import { User } from "../common.types";
 
 const Login = () => {
-  const app = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
 
   const signInWithGoogle = async () => {
@@ -29,9 +16,9 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       const user: User = {
         uid: result.user?.uid || "",
-        displayName: result.user?.displayName || null,
+        name: result.user?.displayName || null,
         email: result.user?.email || null,
-        photoUrl: result.user?.photoURL || null,
+        ImageUrl: result.user?.photoURL || null,
       };
       if (user.uid) {
         dispatch(setUser(user));
@@ -45,14 +32,6 @@ const Login = () => {
   const signInHandler = async () => {
     try {
       await signInWithGoogle();
-
-      // Retrieve the user data after the redirect
-      const userCredential = await getRedirectResult(auth);
-      console.log("hello");
-
-      console.log(userCredential);
-
-      // Store the user data in the Redux store
     } catch (error) {
       console.log(error);
     }

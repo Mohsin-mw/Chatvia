@@ -1,7 +1,8 @@
 export interface User {
-  name: string;
-  email: string;
-  imageUrl: string;
+  uid: string;
+  name: string | null;
+  email: string | null;
+  ImageUrl: string | null;
 }
 
 export interface NavigationItem {
