@@ -3,6 +3,7 @@ export interface User {
   name: string | null;
   email: string | null;
   ImageUrl: string | null;
+  description?: string | null;
 }
 
 export interface NavigationItem {

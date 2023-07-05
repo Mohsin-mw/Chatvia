@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { User } from "../common.types";
 
 const SettingsDashboard = () => {
-  const { user } = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user);
+  const currentUser: User = user.user;
   return (
     <div className="flex-1 xl:overflow-y-auto">
       <div className="mx-auto max-w-3xl py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
@@ -38,7 +40,7 @@ const SettingsDashboard = () => {
                   name="username"
                   id="username"
                   autoComplete="username"
-                  defaultValue={user?.name}
+                  defaultValue={currentUser.name}
                   className="input w-full rounded-l-none  max-w-xs bg-neutral  focus:border-primary"
                 />
               </div>
@@ -54,7 +56,7 @@ const SettingsDashboard = () => {
               <div className="mt-1 flex items-center">
                 <img
                   className="inline-block h-12 w-12 rounded-full"
-                  src={user.ImageUrl}
+                  src={currentUser.ImageUrl}
                   alt=""
                 />
                 <div className="ml-4 flex">
@@ -93,7 +95,7 @@ const SettingsDashboard = () => {
                   name="description"
                   rows={4}
                   className="textarea w-full bg-neutral mt-2 focus:border-primary"
-                  defaultValue={""}
+                  defaultValue={currentUser.description}
                 />
               </div>
             </div>
@@ -118,7 +120,7 @@ const SettingsDashboard = () => {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
-                defaultValue={user?.email}
+                defaultValue={currentUser.email}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
@@ -176,14 +178,6 @@ const SettingsDashboard = () => {
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
-
-            <p className="text-sm text-blue-gray-500 sm:col-span-6">
-              This account was created on{" "}
-              <time dateTime="2017-01-05T20:35:40">
-                January 5, 2017, 8:35:40 PM
-              </time>
-              .
-            </p>
           </div>
 
           <div className="flex justify-end pt-8">

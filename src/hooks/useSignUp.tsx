@@ -32,6 +32,8 @@ const useSignup = () => {
           email: result.email,
           password: password,
           url: result.photoURL,
+          description:
+            "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -43,6 +45,8 @@ const useSignup = () => {
         name: result?.displayName || null,
         email: result?.email || null,
         ImageUrl: result?.photoURL || null,
+        description:
+          "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
       };
 
       if (user.uid) {
