@@ -1,15 +1,9 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../services/firebase";
-import { setUser } from "../store/userSlice";
-import { User } from "../common.types";
 import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
 
 const Login = () => {
-  const dispatch = useDispatch();
   const { signInWithGoogle } = useSignInWithGoogle();
 
   const signInHandler = async () => {
@@ -30,15 +24,12 @@ const Login = () => {
                 <img className="h-12 w-auto" src={logo} alt="Your Company" />
                 <div className="font-bold text-2xl ">Chatvia</div>
               </div>
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900 ">
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900  ">
                 Log in to your account
               </h2>
               <p className="mt-2 text-sm text-gray-600">
                 Or{" "}
-                <Link
-                  to="/signup"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
+                <Link to="/signup" className="font-medium underline">
                   create a brand new account today
                 </Link>
               </p>

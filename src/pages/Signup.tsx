@@ -4,12 +4,13 @@ import { useState } from "react";
 
 import useSignup from "../hooks/useSignUp";
 const Signup = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { Signup } = useSignup();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Signup(email, password);
+    Signup(username, email, password);
   };
 
   return (
@@ -23,7 +24,7 @@ const Signup = () => {
           Or{" "}
           <Link
             to="/login"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
+            className="font-medium text-indigo-600 hover:text-indigo-500 underline"
           >
             Log into your account
           </Link>
@@ -38,6 +39,26 @@ const Signup = () => {
             method="POST"
             onSubmit={(event) => handleSubmit(event)}
           >
+            {/* Name input */}
+            <div>
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Username
+              </label>
+              <div className="mt-1">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                />
+              </div>
+            </div>
             {/* Email input */}
             <div>
               <label

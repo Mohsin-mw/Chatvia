@@ -10,7 +10,7 @@ import { db } from "../services/firebase";
 const useSignup = () => {
   const dispatch = useDispatch();
 
-  const Signup = async (email: string, password: string) => {
+  const Signup = async (name: string, email: string, password: string) => {
     try {
       dispatch(toggleLoading(true));
       const userCredential = await createUserWithEmailAndPassword(
@@ -21,10 +21,22 @@ const useSignup = () => {
       const result = userCredential.user;
 
       await updateProfile(result, {
-        displayName: "Anonymous",
+        displayName: name,
         photoURL:
           "https://png.pngtree.com/png-vector/20220607/ourmid/pngtree-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background-png-image_4853791.png",
       });
+
+      try {
+        const docRef = await addDoc(collection(db, "users"), {
+          name: result.displayName,
+          email: result.email,
+          password: password,
+          url: result.photoURL,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
 
       const user: User = {
         uid: result?.uid || "",
@@ -32,16 +44,7 @@ const useSignup = () => {
         email: result?.email || null,
         ImageUrl: result?.photoURL || null,
       };
-      try {
-        const docRef = await addDoc(collection(db, "users"), {
-          name: "Anonymous",
-          email: user.email,
-          password: password,
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
+
       if (user.uid) {
         dispatch(setUser(user));
       } else {

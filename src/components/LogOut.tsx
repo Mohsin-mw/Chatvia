@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../store/userSlice";
 import { toggleLoading } from "../store/appSlice";
@@ -7,7 +6,6 @@ export default function Logout() {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    setIsLoggingOut(true);
     dispatch(toggleLoading(true));
     setTimeout(() => {
       dispatch(toggleLoading(false));
@@ -48,7 +46,9 @@ export default function Logout() {
           type="button"
           className="btn-neutral text-white py-2 px-4 rounded transition duration-200"
           onClick={handleLogout}
-        ></button>
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

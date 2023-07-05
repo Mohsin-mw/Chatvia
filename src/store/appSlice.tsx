@@ -4,7 +4,6 @@ const app = createSlice({
   name: "app",
   initialState: {
     isLoading: false,
-    user: null,
   },
   reducers: {
     toggleLoading(state, action) {
