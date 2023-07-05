@@ -96,24 +96,6 @@ const SettingsDashboard = () => {
                   defaultValue={""}
                 />
               </div>
-              <p className="mt-3 text-sm text-blue-gray-500">
-                Brief description for your profile. URLs are hyperlinked.
-              </p>
-            </div>
-
-            <div className="sm:col-span-6">
-              <label
-                htmlFor="url"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                URL
-              </label>
-              <input
-                type="text"
-                name="url"
-                id="url"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
             </div>
           </div>
 
@@ -122,10 +104,6 @@ const SettingsDashboard = () => {
               <h2 className="text-xl font-medium text-blue-gray-900">
                 Personal Information
               </h2>
-              <p className="mt-1 text-sm text-blue-gray-500">
-                This information will be displayed publicly so be careful what
-                you share.
-              </p>
             </div>
 
             <div className="sm:col-span-3">
@@ -140,6 +118,7 @@ const SettingsDashboard = () => {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
+                value={user?.email}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
@@ -170,10 +149,11 @@ const SettingsDashboard = () => {
               <select
                 id="country"
                 name="country"
+                disabled={true}
                 autoComplete="country-name"
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               >
-                <option />
+                <option>Pakistan</option>
                 <option>United States</option>
                 <option>Canada</option>
                 <option>Mexico</option>
@@ -191,6 +171,8 @@ const SettingsDashboard = () => {
                 type="text"
                 name="language"
                 id="language"
+                value="Eng"
+                disabled={true}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
