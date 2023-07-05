@@ -34,6 +34,7 @@ const useSignup = () => {
           url: result.photoURL,
           description:
             "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
+          messages: [{ notificationId: "", number: 0 }],
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {

@@ -4,6 +4,7 @@ export interface User {
   email: string | null;
   ImageUrl: string | null;
   description?: string | null;
+  messages?: [];
 }
 
 export interface NavigationItem {
