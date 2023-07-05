@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 /* This example requires Tailwind CSS v2.0+ */
 const people = [
   {
@@ -58,14 +60,19 @@ const activityItems = [
 ];
 
 export default function Feeds() {
+  const [currentBox, setCurrentBox] = useState<number>();
+  const clickHandler = (id: number) => {
+    setCurrentBox(id);
+  };
   return (
     <div>
       <ul role="list" className="">
         {activityItems.map((activityItem) => (
           <li
+            onClick={() => clickHandler(activityItem.id)}
             key={activityItem.id}
             className={` my-2 py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer ${
-              activityItem.active ? "bg-neutral" : ""
+              activityItem.id === currentBox ? "bg-neutral" : ""
             }`}
           >
             <div className="flex space-x-3">

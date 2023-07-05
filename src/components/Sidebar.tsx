@@ -19,7 +19,7 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group "
+                  className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group"
                 >
                   <item.icon
                     className="h-6 w-6  group-hover:text-primary-shade-2 duration-200"
