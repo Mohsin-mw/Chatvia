@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLoading } from "../store/appSlice";
-import useLoader from "../hooks/useLoader";
+import { useSelector } from "react-redux";
 import {
   HomeIcon,
   UserIcon,
@@ -25,14 +23,8 @@ const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user } = useSelector((state: RootState) => state.user);
   const navigationPath = useLocation();
-  const dispatch = useDispatch();
-  const HandlerLoader = () => {
-    useLoader(dispatch);
-  };
-  useEffect(() => {
-    dispatch(toggleLoading(true));
-    HandlerLoader();
-  }, [navigationPath.pathname]);
+
+  useEffect(() => {}, [navigationPath.pathname]);
 
   return (
     <>

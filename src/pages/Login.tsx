@@ -6,29 +6,12 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { setUser } from "../store/userSlice";
 import { User } from "../common.types";
+import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { signInWithGoogle } = useSignInWithGoogle();
 
-  const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user: User = {
-        uid: result.user?.uid || "",
-        name: result.user?.displayName || null,
-        email: result.user?.email || null,
-        ImageUrl: result.user?.photoURL || null,
-      };
-      if (user.uid) {
-        dispatch(setUser(user));
-      } else {
-        console.log("User data not available");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const signInHandler = async () => {
     try {
       await signInWithGoogle();
