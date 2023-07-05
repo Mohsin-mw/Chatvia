@@ -22,38 +22,6 @@ const SettingsDashboard = () => {
               </p>
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                First name
-              </label>
-              <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                autoComplete="given-name"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                Last name
-              </label>
-              <input
-                type="text"
-                name="last-name"
-                id="last-name"
-                autoComplete="family-name"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
-            </div>
-
             <div className="sm:col-span-6">
               <label
                 htmlFor="username"
