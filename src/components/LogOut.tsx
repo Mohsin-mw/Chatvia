@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../store/userSlice";
+import { toggleLoading } from "../store/appSlice";
 
 export default function Logout() {
   const dispatch = useDispatch();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = () => {
     setIsLoggingOut(true);
+    dispatch(toggleLoading(true));
     setTimeout(() => {
+      dispatch(toggleLoading(false));
       dispatch(clearUser());
     }, 2000);
   };
@@ -44,14 +46,9 @@ export default function Logout() {
       <div className="flex justify-end mt-5">
         <button
           type="button"
-          className={`btn-neutral text-white py-2 px-4 rounded transition duration-200 ${
-            isLoggingOut ? "cursor-not-allowed" : ""
-          }`}
+          className="btn-neutral text-white py-2 px-4 rounded transition duration-200"
           onClick={handleLogout}
-          disabled={isLoggingOut}
-        >
-          {isLoggingOut ? "Logging out..." : "Logout"}
-        </button>
+        ></button>
       </div>
     </div>
   );

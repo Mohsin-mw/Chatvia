@@ -118,7 +118,7 @@ const SettingsDashboard = () => {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
-                value={user?.email}
+                defaultValue={user?.email}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
@@ -171,7 +171,7 @@ const SettingsDashboard = () => {
                 type="text"
                 name="language"
                 id="language"
-                value="Eng"
+                defaultValue="Eng"
                 disabled={true}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />

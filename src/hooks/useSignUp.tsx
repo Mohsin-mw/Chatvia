@@ -4,6 +4,8 @@ import { auth } from "../services/firebase";
 import { setUser } from "../store/userSlice";
 import { User } from "../common.types";
 import { toggleLoading } from "../store/appSlice";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const useSignup = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,16 @@ const useSignup = () => {
         email: result?.email || null,
         ImageUrl: result?.photoURL || null,
       };
+      try {
+        const docRef = await addDoc(collection(db, "users"), {
+          name: "Anonymous",
+          email: user.email,
+          password: password,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
       if (user.uid) {
         dispatch(setUser(user));
       } else {
