@@ -5,9 +5,12 @@ import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../services/firebase";
-import { toast } from "react-toastify";
-
+import { db } from "../services/firebase";
+import { collection, query, onSnapshot } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/userSlice";
 const Login = () => {
+  const dispatch = useDispatch();
   const { signInWithGoogle } = useSignInWithGoogle();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,21 +25,18 @@ const Login = () => {
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
-    } catch (error) {
-      toast.error("User not found", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    console.log(user.uid);
+
+    const q = query(collection(db, "users"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const { uid } = doc.data();
+        if (uid === user.uid) {
+          dispatch(setUser(doc.data()));
+        }
       });
-    }
+    });
   };
 
   return (

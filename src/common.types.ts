@@ -2,7 +2,7 @@ export interface User {
   uid: string;
   name: string | null;
   email: string | null;
-  ImageUrl: string | null;
+  url: string | null;
   description?: string | null;
   messages?: [];
 }

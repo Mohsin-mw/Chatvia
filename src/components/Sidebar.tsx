@@ -33,8 +33,8 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
           <div className="flex flex-shrink-0 pb-5 ">
             <Link to="/profile" className="w-full flex-shrink-0">
               <img
-                className="mx-auto block h-10 w-10 rounded-full ring-4 ring-primary-shade-2 "
-                src={user.ImageUrl}
+                className="mx-auto block h-10 w-10 rounded-full shadow-sm "
+                src={user.url}
                 alt=""
               />
               <div className="sr-only">

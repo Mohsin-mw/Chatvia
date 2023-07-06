@@ -1,18 +1,32 @@
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import useSignup from "../hooks/useSignUp";
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { Signup } = useSignup();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    Signup(username, email, password);
+
+  const resetForm = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Message didn't match");
+    } else {
+      Signup(username, email, password);
+    }
+    resetForm();
+  };
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -98,6 +112,26 @@ const Signup = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Confirm Password
+              </label>
+              <div className="mt-1">
+                <input
+                  id="confirmpassword"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 />
               </div>
