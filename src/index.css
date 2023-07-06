@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-color-progress-error: #6159cb;
+  --toastify-icon-color-error: #6159cb;
+}
+
 body {
   font-family: "Public Sans", sans-serif;
 }

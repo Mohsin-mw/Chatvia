@@ -2,15 +2,40 @@ import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { auth } from "../services/firebase";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { signInWithGoogle } = useSignInWithGoogle();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const signInHandler = async () => {
     try {
       await signInWithGoogle();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+    } catch (error) {
+      toast.error("User not found", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -134,7 +159,12 @@ const Login = () => {
               </div>
 
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+                <form
+                  action="#"
+                  method="POST"
+                  className="space-y-6"
+                  onSubmit={(event) => submitHandler(event)}
+                >
                   <div>
                     <label
                       htmlFor="email"
@@ -148,6 +178,8 @@ const Login = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
@@ -167,6 +199,8 @@ const Login = () => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />

@@ -1,4 +1,5 @@
-import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -7,5 +8,6 @@ import { store } from "./store/store.ts";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <App />
+    <ToastContainer />
   </Provider>
 );
