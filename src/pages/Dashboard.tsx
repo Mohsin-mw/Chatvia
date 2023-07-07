@@ -5,10 +5,13 @@ import { User } from "firebase/auth";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { Message } from "../common";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { Outlet } from "react-router-dom";
+import { setUser } from "../store/userSlice";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User[]>([]);
@@ -32,7 +35,14 @@ const Dashboard = () => {
       const updatedUsers: User[] = [];
       querySnapshot.forEach((doc) => {
         const userData = doc.data() as User;
-        if (userData.uid !== loggedUser?.uid) {
+        // if (userData.uid === loggedUser?.uid) {
+        //   updatedUsers.push(loggedUser); // Update the profile with the logged-in user data
+        // } else {
+        //   updatedUsers.push(userData);
+        // }
+        if (userData.uid === loggedUser?.uid) {
+          dispatch(setUser(userData));
+        } else {
           updatedUsers.push(userData);
         }
       });
@@ -45,7 +55,7 @@ const Dashboard = () => {
   }, []);
   return (
     <main className="flex flex-1 overflow-hidden">
-      <MessagesDashboard />
+      <Outlet />
       <SideChatFeed users={users} />
     </main>
   );

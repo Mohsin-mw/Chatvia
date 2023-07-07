@@ -55,7 +55,7 @@ const SettingsDashboard = () => {
               </label>
               <div className="mt-1 flex items-center">
                 <img
-                  className="inline-block h-12 w-12 rounded-full"
+                  className="inline-block h-12 w-12 rounded-full object-cover"
                   src={currentUser.url}
                   alt=""
                 />

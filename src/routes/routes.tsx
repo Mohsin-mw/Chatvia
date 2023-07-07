@@ -11,6 +11,7 @@ import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
 import SettingsDashboard from "../components/SettingsDashboard";
 import LogOut from "../components/LogOut";
+import DashboardHome from "../pages/DashboardHome";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +42,12 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+        children: [
+          {
+            path: "",
+            element: <DashboardHome />,
+          },
+        ],
       },
       {
         path: "/viewprofile",
