@@ -1,3 +1,8 @@
+export interface Message {
+  notificationId: string;
+  number: number;
+}
+
 export interface User {
   uid: string;
   name: string | null;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   HomeIcon,
   UserIcon,
@@ -12,6 +12,10 @@ import PhoneTopBar from "../components/PhoneTopBar";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { RootState } from "../store/store";
+import { db } from "../services/firebase";
+import { onSnapshot, query, collection } from "firebase/firestore";
+import { setUsers } from "../store/appSlice";
+import { Message, User } from "../common";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
@@ -20,11 +24,40 @@ const navigation = [
 ];
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const { user } = useSelector((state: RootState) => state.user);
-  const navigationPath = useLocation();
+  const getUserMessages = () => {
+    const q = query(collection(db, "users"));
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const { uid } = doc.data();
+        if (uid === user?.uid) {
+          const allMessages = doc.data().messages;
+          const allMessagesList = allMessages.map((item: User) => item);
+          setMessages([...messages, ...allMessagesList]);
+        }
+      });
+    });
+  };
+  const getAllUsers = async () => {
+    const q = await query(collection(db, "users"));
+    onSnapshot(q, (querySnapshot) => {
+      const newUsers: User[] = [];
+      querySnapshot.forEach((doc) => {
+        newUsers.push(doc.data() as User);
+      });
+      setUsers((prevUsers) => [...prevUsers, ...newUsers]);
+      localStorage.setItem("users", JSON.stringify([...users, ...newUsers]));
+    });
+  };
 
-  useEffect(() => {}, [navigationPath.pathname]);
+  useEffect(() => {
+    // getUserMessages();
+    getAllUsers();
+  }, []);
 
   return (
     <>

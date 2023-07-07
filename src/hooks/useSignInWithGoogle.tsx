@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { setUser } from "../store/userSlice";
-import { User } from "../common.types";
+import { User } from "../common";
 import { toggleLoading } from "../store/appSlice";
 
 const useSignInWithGoogle = () => {

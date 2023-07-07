@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import { NavigationProps } from "../common.types";
+import { NavigationProps } from "../common";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
   return (

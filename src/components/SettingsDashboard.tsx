@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { User } from "../common.types";
+import { User } from "../common";
 
 const SettingsDashboard = () => {
   const user = useSelector((state: RootState) => state.user);

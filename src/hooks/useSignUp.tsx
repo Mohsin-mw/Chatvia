@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { setUser } from "../store/userSlice";
-import { User } from "../common.types";
+import { User } from "../common";
 import { toggleLoading } from "../store/appSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";

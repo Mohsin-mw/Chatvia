@@ -9,7 +9,7 @@ import {
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { NavigationProps } from "../common.types";
+import { NavigationProps } from "../common";
 
 const PhoneSideBar = ({
   user,
