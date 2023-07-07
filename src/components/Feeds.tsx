@@ -62,6 +62,7 @@ export default function Feeds() {
   const clickHandler = (id: number) => {
     setCurrentBox(id);
   };
+
   return (
     <div>
       <ul role="list" className="">
