@@ -4,9 +4,12 @@ import SideChatFeed from "../components/SideChatFeed";
 import { User } from "firebase/auth";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebase";
-import { setUsers } from "../store/appSlice";
+import { Message } from "../common";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const Dashboard = () => {
+  const { user } = useSelector((state: RootState) => state.user);
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const getUserMessages = () => {
@@ -27,10 +30,15 @@ const Dashboard = () => {
     onSnapshot(q, (querySnapshot) => {
       const newUsers: User[] = [];
       querySnapshot.forEach((doc) => {
-        newUsers.push(doc.data() as User);
+        const userData = doc.data() as User;
+        const existingUser = users.find((user) => user.uid === userData.uid);
+        if (!existingUser) {
+          newUsers.push(userData);
+        }
       });
-      setUsers((prevUsers) => [...prevUsers, ...newUsers]);
-      // localStorage.setItem("users", JSON.stringify([...users, ...newUsers]));
+      if (newUsers.length > 0) {
+        setUsers(newUsers);
+      }
     });
   };
   useEffect(() => {
@@ -40,7 +48,7 @@ const Dashboard = () => {
   return (
     <main className="flex flex-1 overflow-hidden">
       <MessagesDashboard />
-      <SideChatFeed />
+      <SideChatFeed users={users} />
     </main>
   );
 };
