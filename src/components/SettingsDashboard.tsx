@@ -152,13 +152,14 @@ const SettingsDashboard = () => {
                 id="country"
                 name="country"
                 disabled={true}
+                defaultValue="ca"
                 autoComplete="country-name"
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               >
-                <option>Pakistan</option>
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
+                <option value="pk">Pakistan</option>
+                <option value="us">United States</option>
+                <option value="ca">Canada</option>
+                <option value="mx">Mexico</option>
               </select>
             </div>
 
