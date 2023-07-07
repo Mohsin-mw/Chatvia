@@ -26,19 +26,17 @@ const Dashboard = () => {
     });
   };
   const getAllUsers = async () => {
+    const loggedUser = user;
     const q = await query(collection(db, "users"));
     onSnapshot(q, (querySnapshot) => {
-      const newUsers: User[] = [];
+      const updatedUsers: User[] = [];
       querySnapshot.forEach((doc) => {
         const userData = doc.data() as User;
-        const existingUser = users.find((user) => user.uid === userData.uid);
-        if (!existingUser) {
-          newUsers.push(userData);
+        if (userData.uid !== loggedUser?.uid) {
+          updatedUsers.push(userData);
         }
       });
-      if (newUsers.length > 0) {
-        setUsers(newUsers);
-      }
+      setUsers(updatedUsers);
     });
   };
   useEffect(() => {
