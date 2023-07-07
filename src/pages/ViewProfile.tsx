@@ -1,24 +1,4 @@
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  CalendarIcon,
-  CogIcon,
-  HomeIcon,
-  MagnifyingGlassCircleIcon,
-  MapIcon,
-  MegaphoneIcon,
-  SquaresPlusIcon,
-  UserGroupIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronLeftIcon,
-  EnvelopeIcon,
-  FunnelIcon,
-  MagnifyingGlassIcon,
-  PhoneIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const tabs = [{ name: "Profile", href: "#", current: true }];
@@ -93,7 +73,7 @@ export default function ViewProfile() {
                     <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                       <div className="flex">
                         <img
-                          className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32 object-cover"
+                          className="h-24 w-24 rounded-full ring-4 ring-primary-shade-2 sm:h-32 sm:w-32 object-cover"
                           src={propsData.image}
                           alt=""
                         />

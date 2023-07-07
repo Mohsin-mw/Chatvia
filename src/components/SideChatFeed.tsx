@@ -48,7 +48,7 @@ const SideChatFeed = ({ users }: { users: User[] }) => {
           </div>
           <div className="flex flex-col items-start justify-start">
             <div className="my-3 text-sm">Recent</div>
-            <Feeds />
+            <Feeds users={users} />
           </div>
         </div>
       </div>
