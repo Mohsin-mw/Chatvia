@@ -12,9 +12,8 @@ export default function Feeds({ users }: { users: User[] }) {
     <div>
       <ul role="list" className="">
         {users.map((activityItem) => (
-          <Link to={`/chat/${activityItem.uid}`}>
+          <Link key={activityItem.uid} to={`/chat/${activityItem.uid}`}>
             <li
-              key={activityItem.uid}
               className={` my-2 py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer ${
                 Number(activityItem.uid) === currentBox ? "bg-neutral" : ""
               }`}

@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { User } from "../common";
 
 const tabs = [{ name: "Profile", href: "#", current: true }];
@@ -92,7 +92,8 @@ export default function ViewProfile() {
                           </h1>
                         </div>
                         <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                          <button
+                          <Link
+                            to={`/chat/${user?.uid}`}
                             type="button"
                             className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-neutral duration-200"
                           >
@@ -101,7 +102,7 @@ export default function ViewProfile() {
                               aria-hidden="true"
                             />
                             <span>Message</span>
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
