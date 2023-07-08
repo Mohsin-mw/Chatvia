@@ -17,7 +17,11 @@ const SendMessage = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button type="submit" className="btn btn-square mx-2 bg-primary-shade-2">
+      <button
+        type="submit"
+        className="btn btn-square mx-2 bg-primary-shade-2"
+        disabled={value ? false : true}
+      >
         <PaperAirplaneIcon className="h-6 w-6 text-neutral-50" />
       </button>
     </form>
