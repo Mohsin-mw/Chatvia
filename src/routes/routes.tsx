@@ -12,6 +12,7 @@ import ErrorPage from "../pages/ErrorPage";
 import SettingsDashboard from "../components/SettingsDashboard";
 import LogOut from "../components/LogOut";
 import DashboardHome from "../pages/DashboardHome";
+import MessagesDashboard from "../components/MessagesDashboard";
 
 const routes = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const routes = createBrowserRouter([
           {
             path: "",
             element: <DashboardHome />,
+          },
+          {
+            path: "/chat/:id",
+            element: <MessagesDashboard />,
           },
         ],
       },
