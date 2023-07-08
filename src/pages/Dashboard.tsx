@@ -32,14 +32,11 @@ const Dashboard = () => {
     const loggedUser = user;
     const q = await query(collection(db, "users"));
     onSnapshot(q, (querySnapshot) => {
+      const allUsers: User[] = [];
       const updatedUsers: User[] = [];
       querySnapshot.forEach((doc) => {
         const userData = doc.data() as User;
-        // if (userData.uid === loggedUser?.uid) {
-        //   updatedUsers.push(loggedUser); // Update the profile with the logged-in user data
-        // } else {
-        //   updatedUsers.push(userData);
-        // }
+        allUsers.push(userData);
         if (userData.uid === loggedUser?.uid) {
           dispatch(setUser(userData));
         } else {
@@ -47,6 +44,7 @@ const Dashboard = () => {
         }
       });
       setUsers(updatedUsers);
+      localStorage.setItem("users", JSON.stringify(allUsers));
     });
   };
   useEffect(() => {

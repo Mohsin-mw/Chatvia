@@ -41,7 +41,7 @@ const SideChatFeed = ({ users }: { users: User[] }) => {
             <div className="flex flex-row overflow-hidden">
               {users.map((user) => (
                 <div key={user.uid} className="carousel-item px-2">
-                  <Avatar name={user.name} image={user.url} />
+                  <Avatar user={user} />
                 </div>
               ))}
             </div>

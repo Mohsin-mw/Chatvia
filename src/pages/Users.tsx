@@ -1,7 +1,6 @@
 import Avatar from "../components/Avatars";
 import Feeds from "../components/Feeds";
 import Searchbar from "../components/Searchbar";
-import SideChatFeed from "../components/SideChatFeed";
 
 export default function Users() {
   return (

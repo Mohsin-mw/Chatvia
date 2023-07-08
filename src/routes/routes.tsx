@@ -50,7 +50,7 @@ const routes = createBrowserRouter([
         ],
       },
       {
-        path: "/viewprofile",
+        path: "/viewprofile/:id",
         element: <ViewProfile />,
       },
       {
