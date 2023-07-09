@@ -20,7 +20,7 @@ const useSignup = () => {
     try {
       dispatch(toggleLoading(true));
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      const storageRef = ref(storage, image.name);
+      const storageRef = ref(storage, res.user.uid);
       const uploadTask = uploadBytes(storageRef, image);
 
       uploadTask

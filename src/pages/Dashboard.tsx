@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import MessagesDashboard from "../components/MessagesDashboard";
 import SideChatFeed from "../components/SideChatFeed";
 import { User } from "firebase/auth";
 import { query, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { Message } from "../common";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Outlet } from "react-router-dom";
-import { setUser } from "../store/userSlice";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<User[]>([]);
@@ -29,7 +26,6 @@ const Dashboard = () => {
     });
   };
   const getAllUsers = async () => {
-    const loggedUser = user;
     const q = await query(collection(db, "users"));
     onSnapshot(q, (querySnapshot) => {
       const allUsers: User[] = [];
@@ -37,11 +33,7 @@ const Dashboard = () => {
       querySnapshot.forEach((doc) => {
         const userData = doc.data() as User;
         allUsers.push(userData);
-        if (userData.uid === loggedUser?.uid) {
-          dispatch(setUser(userData));
-        } else {
-          updatedUsers.push(userData);
-        }
+        updatedUsers.push(userData);
       });
       setUsers(updatedUsers);
       localStorage.setItem("users", JSON.stringify(allUsers));
