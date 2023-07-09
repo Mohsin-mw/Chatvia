@@ -42,6 +42,7 @@ const useSignup = () => {
             "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
           messages: [{ notificationId: "", number: 0 }],
         });
+        await setDoc(doc(db, "userChats", res.user.uid), {});
         const user: User = {
           uid: res.user.uid || "",
           name: res.user.displayName || null,
