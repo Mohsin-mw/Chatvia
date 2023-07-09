@@ -5,7 +5,6 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 import { auth, storage } from "../services/firebase";
 import { db } from "../services/firebase";
-import { setUser } from "../store/userSlice";
 import { toggleLoading } from "../store/appSlice";
 import { toast } from "react-toastify";
 

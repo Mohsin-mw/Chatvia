@@ -5,10 +5,7 @@ import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../services/firebase";
-import { db } from "../services/firebase";
-import { collection, query, onSnapshot } from "firebase/firestore";
 import { useDispatch } from "react-redux";
-import { setUser } from "../store/userSlice";
 import { toast } from "react-toastify";
 import { toggleLoading } from "../store/appSlice";
 const Login = () => {
@@ -30,15 +27,6 @@ const Login = () => {
     dispatch(toggleLoading(true));
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      const q = query(collection(db, "users"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const { uid } = doc.data();
-          if (uid === user.uid) {
-            dispatch(setUser(doc.data()));
-          }
-        });
-      });
       dispatch(toggleLoading(false));
     } catch (error) {
       dispatch(toggleLoading(false));
