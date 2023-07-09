@@ -9,6 +9,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [image, setImage] = useState("");
   const { Signup } = useSignup();
 
   const resetForm = () => {
@@ -16,14 +17,16 @@ const Signup = () => {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+    setImage("");
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (password !== confirmPassword) {
       toast.error("Message didn't match");
     } else {
-      Signup(username, email, password);
+      Signup(username, email, password, image);
     }
     resetForm();
   };
@@ -134,6 +137,32 @@ const Signup = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 />
+              </div>
+              <div className="sm:col-span-6 mt-5">
+                <div className="mt-1 flex items-center">
+                  <img
+                    className="inline-block h-12 w-12 rounded-full object-cover"
+                    src="https://png.pngtree.com/png-vector/20220607/ourmid/pngtree-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background-png-image_4853791.png"
+                  />
+                  <div className="ml-4 flex">
+                    <div className="relative flex cursor-pointer items-center rounded-md border border-blue-gray-300 bg-white py-2 px-3 shadow-sm focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 focus-within:ring-offset-blue-gray-50 hover:bg-primary">
+                      <label
+                        htmlFor="user-photo"
+                        className="pointer-events-none relative text-sm font-medium text-blue-gray-900"
+                      >
+                        <span>Change</span>
+                        <span className="sr-only"> user photo</span>
+                      </label>
+                      <input
+                        id="user-photo"
+                        name="user-photo"
+                        type="file"
+                        onChange={(e) => setImage(e.target.files[0])}
+                        className="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div>

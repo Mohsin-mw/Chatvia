@@ -1,10 +1,51 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { User } from "../common";
+import { useEffect, useState } from "react";
+import { db } from "../services/firebase";
+import { collection, doc, getDoc, query, updateDoc } from "firebase/firestore";
+import "firebase/firestore";
 
 const SettingsDashboard = () => {
   const user = useSelector((state: RootState) => state.user);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
   const currentUser: User = user.user;
+
+  const setValues = () => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+    setDescription(currentUser.description);
+    setImage(currentUser.url);
+  };
+
+  const saveChanges = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Get a reference to the user document
+      const userRef = db.collection("users").doc(currentUser.uid);
+
+      // Update user data in Firestore
+      await userRef.update({
+        name,
+        email,
+        description,
+        url: image,
+      });
+
+      console.log("Changes saved successfully");
+    } catch (error) {
+      console.error("Error saving changes:", error);
+    }
+  };
+
+  useEffect(() => {
+    setValues();
+  }, []);
+
   return (
     <div className="flex-1 xl:overflow-y-auto">
       <div className="mx-auto max-w-3xl py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
@@ -40,7 +81,8 @@ const SettingsDashboard = () => {
                   name="username"
                   id="username"
                   autoComplete="username"
-                  defaultValue={currentUser.name}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="input w-full rounded-l-none  max-w-xs bg-neutral  focus:border-primary"
                 />
               </div>
@@ -72,12 +114,10 @@ const SettingsDashboard = () => {
                       id="user-photo"
                       name="user-photo"
                       type="file"
+                      onChange={(e) => setImage(e.target.value)}
                       className="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0"
                     />
                   </div>
-                  <button type="button" className="btn btn-ghost ml-2">
-                    Remove
-                  </button>
                 </div>
               </div>
             </div>
@@ -95,7 +135,8 @@ const SettingsDashboard = () => {
                   name="description"
                   rows={4}
                   className="textarea w-full bg-neutral mt-2 focus:border-primary"
-                  defaultValue={currentUser.description}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
             </div>
@@ -120,7 +161,8 @@ const SettingsDashboard = () => {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
-                defaultValue={currentUser.email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
@@ -185,7 +227,11 @@ const SettingsDashboard = () => {
             <button type="button" className="btn btn-neutral mr-2">
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary">
+            <button
+              onClick={(e) => saveChanges(e)}
+              type="submit"
+              className="btn btn-primary"
+            >
               Save
             </button>
           </div>

@@ -1,62 +1,63 @@
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../services/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+import { auth, storage } from "../services/firebase";
 import { setUser } from "../store/userSlice";
 import { User } from "../common";
 import { toggleLoading } from "../store/appSlice";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const useSignup = () => {
   const dispatch = useDispatch();
+  const [error, setError] = useState();
 
-  const Signup = async (name: string, email: string, password: string) => {
+  const Signup = async (
+    name: string,
+    email: string,
+    password: string,
+    image
+  ) => {
     try {
       dispatch(toggleLoading(true));
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const result = userCredential.user;
-
-      await updateProfile(result, {
-        displayName: name,
-        photoURL:
-          "https://png.pngtree.com/png-vector/20220607/ourmid/pngtree-person-gray-photo-placeholder-man-in-t-shirt-on-gray-background-png-image_4853791.png",
-      });
-
-      const docRef = await addDoc(collection(db, "users"), {
-        name: result.displayName,
-        email: result.email,
-        password: password,
-        url: result.photoURL,
-        description:
-          "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
-        messages: [{ notificationId: "", number: 0 }],
-        uid: result?.uid,
-      });
-
-      const user: User = {
-        uid: result?.uid || "",
-        name: result?.displayName || null,
-        email: result?.email || null,
-        url: result?.photoURL || null,
-        description:
-          "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
-      };
-
-      if (user.uid) {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const storageRef = ref(storage, image.name);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      try {
+        await uploadTask;
+        const downloadURL = await getDownloadURL(storageRef);
+        await updateProfile(res.user, {
+          displayName: name,
+          photoURL: downloadURL,
+        });
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          name: name,
+          email: email,
+          url: downloadURL,
+          description:
+            "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
+          messages: [{ notificationId: "", number: 0 }],
+        });
+        const user: User = {
+          uid: res.user.uid || "",
+          name: res.user.displayName || null,
+          email: res.user.email || null,
+          url: res.user.photoURL || null,
+          description:
+            "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
+        };
         dispatch(setUser(user));
-      } else {
-        console.log("User data not available");
+      } catch (error) {
+        setError(error);
       }
       dispatch(toggleLoading(false));
     } catch (error) {
       dispatch(toggleLoading(false));
       toast.error(error.message);
-      console.log("Signup error:", error);
     }
   };
   return { Signup };
