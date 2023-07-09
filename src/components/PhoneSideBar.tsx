@@ -6,7 +6,7 @@ import {
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { NavigationProps } from "../common";
@@ -101,7 +101,7 @@ const PhoneSideBar = ({
                     <div>
                       <img
                         className="inline-block h-10 w-10 rounded-full border "
-                        src={user.url}
+                        src={user.photoURL}
                         alt=""
                       />
                     </div>
@@ -118,9 +118,7 @@ const PhoneSideBar = ({
               </div>
             </Dialog.Panel>
           </Transition.Child>
-          <div className="w-14 flex-shrink-0" aria-hidden="true">
-            {/* Force sidebar to shrink to fit close icon */}
-          </div>
+          <div className="w-14 flex-shrink-0" aria-hidden="true"></div>
         </div>
       </Dialog>
     </Transition.Root>

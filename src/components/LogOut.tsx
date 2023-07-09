@@ -1,16 +1,9 @@
-import { useDispatch } from "react-redux";
-import { clearUser } from "../store/userSlice";
-import { toggleLoading } from "../store/appSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../services/firebase";
 
 export default function Logout() {
-  const dispatch = useDispatch();
-
   const handleLogout = () => {
-    dispatch(toggleLoading(true));
-    setTimeout(() => {
-      dispatch(toggleLoading(false));
-      dispatch(clearUser());
-    }, 2000);
+    signOut(auth);
   };
 
   return (

@@ -1,45 +1,23 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { User } from "../common";
-import { useEffect, useState } from "react";
-import { db } from "../services/firebase";
-import { collection, doc, getDoc, query, updateDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
 import "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
 
 const SettingsDashboard = () => {
-  const user = useSelector((state: RootState) => state.user);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const currentUser: User = user.user;
+  const { currentUser } = useContext(AuthContext);
 
   const setValues = () => {
-    setName(currentUser.name);
+    setName(currentUser.displayName);
     setEmail(currentUser.email);
     setDescription(currentUser.description);
-    setImage(currentUser.url);
+    setImage(currentUser.photoURL);
   };
 
   const saveChanges = async (e) => {
     e.preventDefault();
-
-    try {
-      // Get a reference to the user document
-      const userRef = db.collection("users").doc(currentUser.uid);
-
-      // Update user data in Firestore
-      await userRef.update({
-        name,
-        email,
-        description,
-        url: image,
-      });
-
-      console.log("Changes saved successfully");
-    } catch (error) {
-      console.error("Error saving changes:", error);
-    }
   };
 
   useEffect(() => {
@@ -98,7 +76,7 @@ const SettingsDashboard = () => {
               <div className="mt-1 flex items-center">
                 <img
                   className="inline-block h-12 w-12 rounded-full object-cover"
-                  src={currentUser.url}
+                  src={image}
                   alt=""
                 />
                 <div className="ml-4 flex">

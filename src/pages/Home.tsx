@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   HomeIcon,
@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 import PhoneSideBar from "../components/PhoneSideBar";
 import PhoneTopBar from "../components/PhoneTopBar";
 import { Outlet } from "react-router-dom";
-import { RootState } from "../store/store";
+import { AuthContext } from "../context/AuthContext";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
@@ -20,8 +20,7 @@ const navigation = [
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const { user } = useSelector((state: RootState) => state.user);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <>
@@ -29,11 +28,11 @@ const Home = () => {
         <PhoneSideBar
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-          user={user}
+          user={currentUser}
           navigation={navigation}
           logo={logo}
         />
-        <Sidebar user={user} navigation={navigation} />
+        <Sidebar user={currentUser} navigation={navigation} />
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} logo={logo} />
           <Outlet />

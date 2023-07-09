@@ -3,6 +3,10 @@ import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
+  console.log("_____________________");
+
+  console.log(user);
+
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex w-20 flex-col">
@@ -34,11 +38,11 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
             <Link to="/profile" className="w-full flex-shrink-0">
               <img
                 className="mx-auto block h-10 w-10 rounded-full shadow-sm object-cover"
-                src={user.url}
+                src={user.photoURL}
                 alt=""
               />
               <div className="sr-only">
-                <p>{user.name}</p>
+                <p>{user.displayName}</p>
                 <p>Account settings</p>
               </div>
             </Link>
