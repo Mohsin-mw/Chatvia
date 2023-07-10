@@ -16,12 +16,12 @@ const Avatar = ({ user }: Props) => {
         <div>
           <img
             className="object-cover inline-block h-9 w-9 rounded-full"
-            src={user.url}
+            src={user.photoURL}
           />
         </div>
         <div className="mt-1 flex flex-col">
           <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-            {user.name}
+            {user.displayName}
           </p>
           <p className="text-xs font-medium text-gray-500 opacity-0 group-hover:opacity-100  group-hover:text-gray-700 duration-200">
             View profile

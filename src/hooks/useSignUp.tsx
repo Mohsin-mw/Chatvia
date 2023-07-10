@@ -31,12 +31,9 @@ const useSignup = () => {
           });
           await setDoc(doc(db, "users", res.user.uid), {
             uid: res.user.uid,
-            name: name,
+            displayName: name,
             email: email,
-            url: downloadURL,
-            description:
-              "Welcome to my profile! I'm a new user of this platform and I'm excited to connect with others and explore the community",
-            messages: [{ notificationId: "", number: 0 }],
+            photoURL: downloadURL,
           });
           await setDoc(doc(db, "userChats", res.user.uid), {});
         })

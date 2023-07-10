@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { User } from "../common";
 import { Link } from "react-router-dom";
+import { User } from "../common";
 
-export default function Feeds({ users }: { users: User[] }) {
+export default function Feeds() {
   const [currentBox, setCurrentBox] = useState<number>();
+  const [users, setUsers] = useState<User[]>([]);
   const clickHandler = (id: number) => {
     setCurrentBox(id);
   };
@@ -21,12 +22,14 @@ export default function Feeds({ users }: { users: User[] }) {
               <div className="flex space-x-3">
                 <img
                   className="h-6 w-6 rounded-full object-cover"
-                  src={activityItem.url}
+                  src={activityItem.photoURL}
                   alt=""
                 />
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium">{activityItem.name}</h3>
+                    <h3 className="text-sm font-medium">
+                      {activityItem.displayName}
+                    </h3>
                   </div>
                   <p className="text-sm text-gray-500">
                     {activityItem.description}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   HomeIcon,
@@ -14,13 +14,13 @@ import { AuthContext } from "../context/AuthContext";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
-  { name: "Users", href: "/users", icon: MagnifyingGlassCircleIcon },
   { name: "Profile", href: "/profile", icon: UserIcon },
 ];
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
 
   return (
     <>

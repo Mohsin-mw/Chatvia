@@ -7,8 +7,9 @@ import { AuthContext } from "../context/AuthContext";
 
 const MessagesDashboard = () => {
   const { currentUser } = useContext(AuthContext);
+  let { id } = useParams();
+  console.log(id);
 
-  // let { id } = useParams();
   // const getUser = async () => {
   //   const usersString = localStorage.getItem("users");
   //   const users = await JSON.parse(usersString); // Parse the string into an array of objects

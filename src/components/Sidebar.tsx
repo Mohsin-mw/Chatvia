@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
   return (
@@ -34,11 +35,11 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
             <Link to="/profile" className="w-full flex-shrink-0">
               <img
                 className="mx-auto block h-10 w-10 rounded-full shadow-sm object-cover"
-                src={user.photoURL}
+                src={user?.photoURL}
                 alt=""
               />
               <div className="sr-only">
-                <p>{user.displayName}</p>
+                <p>{user?.displayName}</p>
                 <p>Account settings</p>
               </div>
             </Link>

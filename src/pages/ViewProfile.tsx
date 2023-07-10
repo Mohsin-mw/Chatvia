@@ -1,32 +1,25 @@
 import { ChevronLeftIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { User } from "../common";
-
-const tabs = [{ name: "Profile", href: "#", current: true }];
-const profile = {
-  name: "Ricardo Cooper",
-  imageUrl:
-    "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-  coverImageUrl:
-    "https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-  about: `
-    <p>Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean posuere aliquam.</p>
-    <p>Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum, cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus suspendisse.</p>
-  `,
-  fields: {
-    Phone: "(555) 123-4567",
-    Email: "ricardocooper@example.com",
-  },
-};
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { db } from "../services/firebase";
+import { AuthContext } from "../context/AuthContext";
 
 export default function ViewProfile() {
+  const { currentUser } = useContext(AuthContext);
   const [user, setUser] = useState<User>();
-  let { id } = useParams();
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -35,10 +28,44 @@ export default function ViewProfile() {
   };
 
   const getUser = async () => {
-    const usersString = localStorage.getItem("users");
-    const users = await JSON.parse(usersString); // Parse the string into an array of objects
-    const matchingItems = users.filter((item) => item.uid === id);
-    setUser(matchingItems[0]);
+    const citiesRef = collection(db, "users");
+
+    const q = query(citiesRef, where("uid", "==", id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      setUser(doc.data());
+    });
+  };
+
+  const handleMessage = async () => {
+    const combinedId =
+      currentUser.uid > user?.uid
+        ? currentUser.uid + user?.uid
+        : user?.uid + currentUser.uid;
+    try {
+      const res = await getDoc(doc(db, "chats", combinedId));
+      if (!res.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user?.displayName,
+            photoURL: user?.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentUser.uid,
+            displayName: currentUser?.displayName,
+            photoURL: currentUser?.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -72,7 +99,7 @@ export default function ViewProfile() {
                   <div>
                     <img
                       className="h-32 w-full object-cover lg:h-48"
-                      src={profile.coverImageUrl}
+                      src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
                       alt=""
                     />
                   </div>
@@ -81,19 +108,20 @@ export default function ViewProfile() {
                       <div className="flex">
                         <img
                           className="h-24 w-24 rounded-full ring-4 ring-primary-shade-2 sm:h-32 sm:w-32 object-cover"
-                          src={user?.url}
+                          src={user?.photoURL}
                           alt=""
                         />
                       </div>
                       <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         <div className="mt-6 min-w-0 flex-1 sm:hidden 2xl:block">
                           <h1 className="truncate text-2xl font-bold text-gray-900">
-                            {user?.name}
+                            {user?.displayName}
                           </h1>
                         </div>
                         <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                          <Link
-                            to={`/chat/${user?.uid}`}
+                          <button
+                            onClick={handleMessage}
+                            // to={`/chat/${user?.uid}`}
                             type="button"
                             className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-neutral duration-200"
                           >
@@ -102,13 +130,13 @@ export default function ViewProfile() {
                               aria-hidden="true"
                             />
                             <span>Message</span>
-                          </Link>
+                          </button>
                         </div>
                       </div>
                     </div>
                     <div className="mt-6 hidden min-w-0 flex-1 sm:block 2xl:hidden">
                       <h1 className="truncate text-2xl font-bold text-gray-900">
-                        {user?.name}
+                        {user?.displayName}
                       </h1>
                     </div>
                   </div>
