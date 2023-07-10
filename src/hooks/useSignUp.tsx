@@ -1,15 +1,13 @@
-import { User } from "../common";
-import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 import { auth, storage } from "../services/firebase";
 import { db } from "../services/firebase";
-import { toggleLoading } from "../store/appSlice";
 import { toast } from "react-toastify";
+import { useLoading } from "../context/LoadierContext";
 
 const useSignup = () => {
-  const dispatch = useDispatch();
+  const { isLoading, setLoading } = useLoading();
   const Signup = async (
     name: string,
     email: string,
@@ -17,7 +15,7 @@ const useSignup = () => {
     image
   ) => {
     try {
-      dispatch(toggleLoading(true));
+      setLoading(true);
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const storageRef = ref(storage, res.user.uid);
       const uploadTask = uploadBytes(storageRef, image);
@@ -46,9 +44,9 @@ const useSignup = () => {
           console.error("Error uploading image:", error);
         });
 
-      dispatch(toggleLoading(false));
+      setLoading(false);
     } catch (error) {
-      dispatch(toggleLoading(false));
+      setLoading(false);
       toast.error(error.message);
     }
   };

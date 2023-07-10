@@ -5,11 +5,10 @@ import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../services/firebase";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { toggleLoading } from "../store/appSlice";
+import { useLoading } from "../context/LoadierContext";
 const Login = () => {
-  const dispatch = useDispatch();
+  const { isLoading, setLoading } = useLoading();
   const { signInWithGoogle } = useSignInWithGoogle();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,12 +23,12 @@ const Login = () => {
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(toggleLoading(true));
+    setLoading(true);
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(toggleLoading(false));
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
     } catch (error) {
-      dispatch(toggleLoading(false));
+      setLoading(false);
       toast.error(error.message);
     }
   };
