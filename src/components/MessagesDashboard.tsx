@@ -2,32 +2,32 @@ import { useParams } from "react-router-dom";
 import ChatUserBanner from "./ChatUserBanner";
 import MessageScreen from "./MessageScreen";
 import SendMessage from "./SendMessage";
-import { useEffect, useState } from "react";
-import { User } from "../common";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const MessagesDashboard = () => {
-  const [user, setUser] = useState<User>();
-  let { id } = useParams();
+  const { currentUser } = useContext(AuthContext);
 
-  const getUser = async () => {
-    const usersString = localStorage.getItem("users");
-    const users = await JSON.parse(usersString); // Parse the string into an array of objects
-    const matchingItems = users.filter((item) => item.uid === id);
-    setUser(matchingItems[0]);
-  };
+  // let { id } = useParams();
+  // const getUser = async () => {
+  //   const usersString = localStorage.getItem("users");
+  //   const users = await JSON.parse(usersString); // Parse the string into an array of objects
+  //   const matchingItems = users.filter((item) => item.uid === id);
+  //   setUser(matchingItems[0]);
+  // };
 
-  useEffect(() => {
-    getUser();
-  }, [id]);
+  // useEffect(() => {
+  //   getUser();
+  // }, [id]);
 
   return (
     <section
       aria-labelledby="primary-heading"
       className="flex h-full min-w-0 flex-1 flex-col overflow-y-auto lg:order-last"
     >
-      {user && (
+      {currentUser && (
         <>
-          <ChatUserBanner user={user} />
+          <ChatUserBanner user={currentUser} />
           <div className="flex flex-col h-full">
             <MessageScreen />
             <SendMessage />

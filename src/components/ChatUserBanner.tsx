@@ -1,4 +1,4 @@
-import { PhoneIcon, UserIcon } from "@heroicons/react/20/solid";
+import { UserIcon } from "@heroicons/react/20/solid";
 import { User } from "../common";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const profile = {
   ],
 };
 
-const ChatUserBanner = ({ user }: { user: User }) => {
+const ChatUserBanner: React.FC<User> = ({ user }: { user: User }) => {
   return (
     <div className="border-b-[1px] pb-5">
       <div>
@@ -36,14 +36,14 @@ const ChatUserBanner = ({ user }: { user: User }) => {
           <div className="flex ">
             <img
               className="h-24 w-24 rounded-full ring-4 ring-primary-shade-2 sm:h-32 sm:w-32"
-              src={user.url}
+              src={user.photoURL}
               alt=""
             />
           </div>
           <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1 ">
             <div className="mt-6 min-w-0 flex-1 sm:hidden md:block">
               <h1 className="truncate text-2xl font-bold text-gray-900">
-                {user.name}
+                {user.displayName}
               </h1>
             </div>
             <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -62,7 +62,7 @@ const ChatUserBanner = ({ user }: { user: User }) => {
         </div>
         <div className="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
           <h1 className="truncate text-2xl font-bold text-gray-900 ">
-            {user.name}
+            {user.displayName}
           </h1>
         </div>
       </div>

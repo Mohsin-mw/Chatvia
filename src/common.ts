@@ -5,11 +5,10 @@ export interface Message {
 
 export interface User {
   uid: string;
-  name: string | null;
+  displayName: string | null;
   email: string | null;
-  url: string | null;
-  description?: string | null;
-  messages?: [];
+  photoURL: string | null;
+  description: string | null;
 }
 
 export interface NavigationItem {
