@@ -8,7 +8,6 @@ import { useLoading } from "./context/LoadierContext.tsx";
 function App() {
   const { isLoading } = useLoading();
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
 
   return (
     <div className="h-screen">

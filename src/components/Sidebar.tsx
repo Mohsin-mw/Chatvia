@@ -3,8 +3,6 @@ import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
-  console.log(user);
-
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex w-20 flex-col">

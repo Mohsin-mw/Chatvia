@@ -5,20 +5,33 @@ import Feeds from "./Feeds";
 import Searchbar from "./Searchbar";
 
 const SideChatFeed = ({ users }: { users: User[] }) => {
+  const [people, setPeople] = useState([]);
   const filterSearch = (text) => {
-    console.log(text);
+    if (text === "") {
+      setPeople(users);
+    } else {
+      const filteredPeople = users.filter((user) => {
+        return user.name.toLowerCase().includes(text.toLowerCase());
+      });
+      setPeople(filteredPeople);
+    }
   };
+
+  useEffect(() => {
+    if (users.length > 0) {
+      setPeople(users);
+    }
+  }, [users]);
 
   return (
     <aside className="hidden lg:order-first lg:block lg:flex-shrink-0">
       <div className="relative flex h-full w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white">
         <div className="flex flex-col space-y-5 pt-5 px-5">
           <div className="text-sm">Chats</div>
-          <input onChange={(e) => filterSearch(e.target.value)} />
-          <Searchbar />
+          <Searchbar filterSearch={filterSearch} />
           <div className="flex flex-row justify-around">
             <div className="flex flex-row overflow-hidden">
-              {users.map((user) => (
+              {people.map((user) => (
                 <div key={user.uid} className="carousel-item px-2">
                   <Avatar user={user} />
                 </div>
