@@ -23,7 +23,7 @@ Chatvia is a dynamic and intuitive messaging website designed to provide users w
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-![chatvia](https://github.com/Mohsin-mw/Flip-Market-Ecommerce-Web-App/assets/122507740/c72ab3bf-5b04-4993-ab93-9c33bcdfd32b)
+![chatvia2](https://github.com/Mohsin-mw/Chatvia/assets/122507740/efea6bbf-7011-4ce8-a0ae-1c8defc8a987)
 
 
 
