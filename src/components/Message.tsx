@@ -1,29 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ChatContext } from "../context/ChatContext";
 import { AuthContext } from "../context/AuthContext";
-
-interface activity {
-  id: number;
-  type: string;
-  person: string;
-  imageUrl: string;
-  content: string;
-  time: string;
-}
-
-interface Props {
-  message: activity;
-}
 
 const Message = ({ message }) => {
   const { data } = useContext(ChatContext);
   const { currentUser } = useContext(AuthContext);
-  console.log(data);
-  console.log(currentUser);
+  const ref = useRef();
   const milliseconds =
     message.date.seconds * 1000 + message.date.nanoseconds / 1000000;
   const date = new Date(milliseconds);
   const formattedDate = date.toLocaleString();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [message]);
 
   return (
     <>
