@@ -11,7 +11,7 @@ const SideChatFeed = ({ users }: { users: User[] }) => {
       setPeople(users);
     } else {
       const filteredPeople = users.filter((user) => {
-        return user.name.toLowerCase().includes(text.toLowerCase());
+        return user.displayName.toLowerCase().includes(text.toLowerCase());
       });
       setPeople(filteredPeople);
     }
