@@ -34,37 +34,38 @@ export default function Feeds() {
   return (
     <div>
       <ul role="list" className="">
-        {Object.entries(chats)?.map((chat) => (
-          <div key={chat[0]} onClick={() => HandleSelect(chat[1].userInfo)}>
-            <Link to={`/chat/${chat[0]}`}>
-              <li
-                className={` my-2 py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer ${
-                  Number(chat[1].userInfo.uid) === currentBox
-                    ? "bg-neutral"
-                    : ""
-                }`}
-              >
-                <div className="flex space-x-3">
-                  <img
-                    className="h-6 w-6 rounded-full object-cover"
-                    src={chat[1].userInfo.photoURL}
-                    alt=""
-                  />
-                  <div className="flex-1 space-y-1">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium">
-                        {chat[1].userInfo.displayName}
-                      </h3>
+        {chats &&
+          Object.entries(chats)?.map((chat) => (
+            <div key={chat[0]} onClick={() => HandleSelect(chat[1].userInfo)}>
+              <Link to={`/chat/${chat[0]}`}>
+                <li
+                  className={` my-2 py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer ${
+                    Number(chat[1].userInfo.uid) === currentBox
+                      ? "bg-neutral"
+                      : ""
+                  }`}
+                >
+                  <div className="flex space-x-3">
+                    <img
+                      className="h-6 w-6 rounded-full object-cover"
+                      src={chat[1].userInfo.photoURL}
+                      alt=""
+                    />
+                    <div className="flex-1 space-y-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-sm font-medium">
+                          {chat[1].userInfo.displayName}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-gray-500">
+                        {chat[1].lastMessage?.text}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-500">
-                      {chat[1].userInfo?.lastMessage?.text}
-                    </p>
                   </div>
-                </div>
-              </li>
-            </Link>
-          </div>
-        ))}
+                </li>
+              </Link>
+            </div>
+          ))}
       </ul>
     </div>
   );

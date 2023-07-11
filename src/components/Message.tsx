@@ -18,23 +18,40 @@ interface Props {
 const Message = ({ message }) => {
   const { data } = useContext(ChatContext);
   const { currentUser } = useContext(AuthContext);
+  console.log(data);
+  console.log(currentUser);
+  const milliseconds =
+    message.date.seconds * 1000 + message.date.nanoseconds / 1000000;
+  const date = new Date(milliseconds);
+  const formattedDate = date.toLocaleString();
 
   return (
     <>
-      <div className="chat chat-start">
+      <div
+        className={`chat ${
+          message.senderId == data.user.uid ? "chat-start" : "chat-end"
+        }`}
+      >
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
-            <img src={message.imageUrl} />
+            <img
+              src={
+                message.senderId == data.user.uid
+                  ? data.user.photoURL
+                  : currentUser.photoURL
+              }
+            />
           </div>
         </div>
         <div className="chat-header">
-          {message.person}
+          {message.senderId == data.user.uid
+            ? data.user.displayName.toUpperCase()
+            : currentUser.displayName.toUpperCase()}
           <time className="mx-1 text-xs opacity-50 object-cover">
-            {message.time}
+            {formattedDate}
           </time>
         </div>
-        <div className="chat-bubble">{message.content}</div>
-        <div className="chat-footer opacity-50">Delivered</div>
+        <div className="chat-bubble">{message.text}</div>
       </div>
     </>
   );
