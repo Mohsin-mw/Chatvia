@@ -1,12 +1,12 @@
 import { Navigate } from "react-router-dom";
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 type Props = {
   children: JSX.Element;
 };
 const Protected: React.FC<Props> = ({ children }) => {
-  const userAuthenticated = useSelector((state: RootState) => state.user);
-  return userAuthenticated.user ? children : <Navigate to={"/login"} replace />;
+  const { currentUser } = useContext(AuthContext);
+  return currentUser ? children : <Navigate to={"/login"} replace />;
 };
 
 export default Protected;

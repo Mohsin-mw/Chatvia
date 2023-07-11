@@ -11,6 +11,8 @@ import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
 import SettingsDashboard from "../components/SettingsDashboard";
 import LogOut from "../components/LogOut";
+import DashboardHome from "../pages/DashboardHome";
+import MessagesDashboard from "../components/MessagesDashboard";
 
 const routes = createBrowserRouter([
   {
@@ -41,9 +43,19 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+        children: [
+          {
+            path: "",
+            element: <DashboardHome />,
+          },
+          {
+            path: "/chat/:id",
+            element: <MessagesDashboard />,
+          },
+        ],
       },
       {
-        path: "/viewprofile",
+        path: "/viewprofile/:id",
         element: <ViewProfile />,
       },
       {

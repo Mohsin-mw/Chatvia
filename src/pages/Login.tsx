@@ -1,39 +1,35 @@
 import { AiFillHeart } from "react-icons/ai";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import useSignInWithGoogle from "../hooks/useSignInWithGoogle";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 import { auth } from "../services/firebase";
-import { setUser } from "../store/userSlice";
-import { User } from "../common.types";
-
+import { toast } from "react-toastify";
+import { useLoading } from "../context/LoadierContext";
 const Login = () => {
-  const dispatch = useDispatch();
+  const { isLoading, setLoading } = useLoading();
+  const { signInWithGoogle } = useSignInWithGoogle();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user: User = {
-        uid: result.user?.uid || "",
-        name: result.user?.displayName || null,
-        email: result.user?.email || null,
-        ImageUrl: result.user?.photoURL || null,
-      };
-      if (user.uid) {
-        dispatch(setUser(user));
-      } else {
-        console.log("User data not available");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const signInHandler = async () => {
     try {
       await signInWithGoogle();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
     }
   };
 
@@ -47,15 +43,12 @@ const Login = () => {
                 <img className="h-12 w-auto" src={logo} alt="Your Company" />
                 <div className="font-bold text-2xl ">Chatvia</div>
               </div>
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900 ">
+              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900  ">
                 Log in to your account
               </h2>
               <p className="mt-2 text-sm text-gray-600">
                 Or{" "}
-                <Link
-                  to="/signup"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
+                <Link to="/signup" className="font-medium underline">
                   create a brand new account today
                 </Link>
               </p>
@@ -160,7 +153,12 @@ const Login = () => {
               </div>
 
               <div className="mt-6">
-                <form action="#" method="POST" className="space-y-6">
+                <form
+                  action="#"
+                  method="POST"
+                  className="space-y-6"
+                  onSubmit={(event) => submitHandler(event)}
+                >
                   <div>
                     <label
                       htmlFor="email"
@@ -174,6 +172,8 @@ const Login = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
@@ -193,6 +193,8 @@ const Login = () => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />

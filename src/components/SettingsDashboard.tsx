@@ -1,8 +1,29 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useContext, useEffect, useState } from "react";
+import "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
 
 const SettingsDashboard = () => {
-  const { user } = useSelector((state: RootState) => state.user);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const { currentUser } = useContext(AuthContext);
+
+  const setValues = () => {
+    setName(currentUser.displayName);
+    setEmail(currentUser.email);
+    setDescription(currentUser.description);
+    setImage(currentUser.photoURL);
+  };
+
+  const saveChanges = async (e) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    setValues();
+  }, []);
+
   return (
     <div className="flex-1 xl:overflow-y-auto">
       <div className="mx-auto max-w-3xl py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
@@ -22,38 +43,6 @@ const SettingsDashboard = () => {
               </p>
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                First name
-              </label>
-              <input
-                type="text"
-                name="first-name"
-                id="first-name"
-                autoComplete="given-name"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                Last name
-              </label>
-              <input
-                type="text"
-                name="last-name"
-                id="last-name"
-                autoComplete="family-name"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
-            </div>
-
             <div className="sm:col-span-6">
               <label
                 htmlFor="username"
@@ -70,7 +59,8 @@ const SettingsDashboard = () => {
                   name="username"
                   id="username"
                   autoComplete="username"
-                  defaultValue={user?.name}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="input w-full rounded-l-none  max-w-xs bg-neutral  focus:border-primary"
                 />
               </div>
@@ -85,8 +75,8 @@ const SettingsDashboard = () => {
               </label>
               <div className="mt-1 flex items-center">
                 <img
-                  className="inline-block h-12 w-12 rounded-full"
-                  src={user.ImageUrl}
+                  className="inline-block h-12 w-12 rounded-full object-cover"
+                  src={image}
                   alt=""
                 />
                 <div className="ml-4 flex">
@@ -102,12 +92,10 @@ const SettingsDashboard = () => {
                       id="user-photo"
                       name="user-photo"
                       type="file"
+                      onChange={(e) => setImage(e.target.value)}
                       className="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0"
                     />
                   </div>
-                  <button type="button" className="btn btn-ghost ml-2">
-                    Remove
-                  </button>
                 </div>
               </div>
             </div>
@@ -125,27 +113,10 @@ const SettingsDashboard = () => {
                   name="description"
                   rows={4}
                   className="textarea w-full bg-neutral mt-2 focus:border-primary"
-                  defaultValue={""}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <p className="mt-3 text-sm text-blue-gray-500">
-                Brief description for your profile. URLs are hyperlinked.
-              </p>
-            </div>
-
-            <div className="sm:col-span-6">
-              <label
-                htmlFor="url"
-                className="block text-sm font-medium text-blue-gray-900"
-              >
-                URL
-              </label>
-              <input
-                type="text"
-                name="url"
-                id="url"
-                className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
-              />
             </div>
           </div>
 
@@ -154,10 +125,6 @@ const SettingsDashboard = () => {
               <h2 className="text-xl font-medium text-blue-gray-900">
                 Personal Information
               </h2>
-              <p className="mt-1 text-sm text-blue-gray-500">
-                This information will be displayed publicly so be careful what
-                you share.
-              </p>
             </div>
 
             <div className="sm:col-span-3">
@@ -172,6 +139,8 @@ const SettingsDashboard = () => {
                 name="email-address"
                 id="email-address"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
@@ -202,13 +171,15 @@ const SettingsDashboard = () => {
               <select
                 id="country"
                 name="country"
+                disabled={true}
+                defaultValue="ca"
                 autoComplete="country-name"
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               >
-                <option />
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
+                <option value="pk">Pakistan</option>
+                <option value="us">United States</option>
+                <option value="ca">Canada</option>
+                <option value="mx">Mexico</option>
               </select>
             </div>
 
@@ -223,24 +194,22 @@ const SettingsDashboard = () => {
                 type="text"
                 name="language"
                 id="language"
+                defaultValue="Eng"
+                disabled={true}
                 className="input w-full max-w-xs bg-neutral mt-2 focus:border-primary"
               />
             </div>
-
-            <p className="text-sm text-blue-gray-500 sm:col-span-6">
-              This account was created on{" "}
-              <time dateTime="2017-01-05T20:35:40">
-                January 5, 2017, 8:35:40 PM
-              </time>
-              .
-            </p>
           </div>
 
           <div className="flex justify-end pt-8">
             <button type="button" className="btn btn-neutral mr-2">
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary">
+            <button
+              onClick={(e) => saveChanges(e)}
+              type="submit"
+              className="btn btn-primary"
+            >
               Save
             </button>
           </div>

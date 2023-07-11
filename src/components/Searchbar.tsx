@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-const Searchbar = () => {
+const Searchbar = ({ filterSearch }) => {
   return (
     <div className="relative z-0 flex flex-1 items-start justify-start px-2  sm:inset-0">
       <div className="w-full sm:max-w-xs">
@@ -20,6 +20,7 @@ const Searchbar = () => {
             className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
             placeholder="Search"
             type="search"
+            onChange={(e) => filterSearch(e.target.value)}
           />
         </div>
       </div>

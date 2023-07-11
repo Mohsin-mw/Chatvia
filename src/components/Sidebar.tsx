@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import { NavigationProps } from "../common.types";
+import { NavigationProps } from "../common";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
   return (
@@ -19,7 +20,7 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group "
+                  className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group"
                 >
                   <item.icon
                     className="h-6 w-6  group-hover:text-primary-shade-2 duration-200"
@@ -33,12 +34,12 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
           <div className="flex flex-shrink-0 pb-5 ">
             <Link to="/profile" className="w-full flex-shrink-0">
               <img
-                className="mx-auto block h-10 w-10 rounded-full ring-4 ring-primary-shade-2 "
-                src={user.ImageUrl}
+                className="mx-auto block h-10 w-10 rounded-full shadow-sm object-cover"
+                src={user?.photoURL}
                 alt=""
               />
               <div className="sr-only">
-                <p>{user.name}</p>
+                <p>{user?.displayName}</p>
                 <p>Account settings</p>
               </div>
             </Link>

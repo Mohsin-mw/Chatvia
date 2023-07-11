@@ -5,7 +5,7 @@ module.exports = {
     "./src/Components/*.tsx",
     { raw: "<div class=min-h-screen", extension: "html" },
   ],
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui", "tailwind-scrollbar")],
   daisyui: {
     themes: ["light", "dark", "cupcake"],
   },

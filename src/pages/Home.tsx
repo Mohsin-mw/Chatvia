@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLoading } from "../store/appSlice";
-import useLoader from "../hooks/useLoader";
+import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   HomeIcon,
   UserIcon,
@@ -12,41 +10,28 @@ import Sidebar from "../components/Sidebar";
 import PhoneSideBar from "../components/PhoneSideBar";
 import PhoneTopBar from "../components/PhoneTopBar";
 import { Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { RootState } from "../store/store";
+import { AuthContext } from "../context/AuthContext";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
-  { name: "Users", href: "/users", icon: MagnifyingGlassCircleIcon },
   { name: "Profile", href: "/profile", icon: UserIcon },
 ];
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user } = useSelector((state: RootState) => state.user);
-  const navigationPath = useLocation();
-  const dispatch = useDispatch();
-  const HandlerLoader = () => {
-    useLoader(dispatch);
-  };
-  useEffect(() => {
-    dispatch(toggleLoading(true));
-    HandlerLoader();
-  }, [navigationPath.pathname]);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <>
       <div className="flex h-full">
-        {user && (
-          <PhoneSideBar
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-            user={user}
-            navigation={navigation}
-            logo={logo}
-          />
-        )}
-        <Sidebar user={user} navigation={navigation} />
+        <PhoneSideBar
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
+          user={currentUser}
+          navigation={navigation}
+          logo={logo}
+        />
+        <Sidebar user={currentUser} navigation={navigation} />
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} logo={logo} />
           <Outlet />
