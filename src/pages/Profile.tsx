@@ -1,7 +1,6 @@
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 import SettingsSubNavigation from "../components/SettingsSubNavigation";
 import { Outlet, useNavigate } from "react-router-dom";
-import SettingsDashboard from "../components/SettingsDashboard";
 export default function Profile() {
   const navigate = useNavigate();
 

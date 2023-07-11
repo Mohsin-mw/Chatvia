@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common";
-import { useEffect, useState } from "react";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
   return (

@@ -1,11 +1,4 @@
-import {
-  BookmarkSquareIcon,
-  FireIcon,
-  HomeIcon,
-  InboxIcon,
-  UserIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
@@ -107,7 +100,7 @@ const PhoneSideBar = ({
                     </div>
                     <div className="ml-3">
                       <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {user.name}
+                        {user.displayName}
                       </p>
                       <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                         Account Settings

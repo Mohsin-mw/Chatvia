@@ -12,9 +12,6 @@ export default function Feeds() {
 
   const [currentBox, setCurrentBox] = useState<number>();
   const [chats, setChats] = useState<User[]>([]);
-  const clickHandler = (id: number) => {
-    setCurrentBox(id);
-  };
 
   useEffect(() => {
     if (currentUser && currentUser.uid) {

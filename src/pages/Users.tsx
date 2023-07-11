@@ -1,4 +1,3 @@
-import Avatar from "../components/Avatars";
 import Feeds from "../components/Feeds";
 import Searchbar from "../components/Searchbar";
 

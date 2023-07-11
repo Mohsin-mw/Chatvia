@@ -1,10 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import {
-  HomeIcon,
-  UserIcon,
-  MagnifyingGlassCircleIcon,
-} from "@heroicons/react/24/outline";
+import { useContext, useState } from "react";
+import { HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.svg";
 import Sidebar from "../components/Sidebar";
 import PhoneSideBar from "../components/PhoneSideBar";
