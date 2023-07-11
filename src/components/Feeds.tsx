@@ -20,7 +20,6 @@ export default function Feeds() {
     if (currentUser && currentUser.uid) {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
-        console.log(chats);
       });
       return () => {
         unsub();
@@ -29,8 +28,6 @@ export default function Feeds() {
   }, [currentUser]);
 
   const HandleSelect = (user) => {
-    console.log(user.uid);
-
     disptach({ type: "CHANGE_USER", payload: user });
   };
 

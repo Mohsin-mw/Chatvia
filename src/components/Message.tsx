@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { ChatContext } from "../context/ChatContext";
+import { AuthContext } from "../context/AuthContext";
+
 interface activity {
   id: number;
   type: string;
@@ -11,7 +15,10 @@ interface Props {
   message: activity;
 }
 
-const Message = ({ message }: Props) => {
+const Message = ({ message }) => {
+  const { data } = useContext(ChatContext);
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <>
       <div className="chat chat-start">
