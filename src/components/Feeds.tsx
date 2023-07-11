@@ -46,6 +46,9 @@ export default function Feeds() {
                       {chat[1].userInfo.displayName}
                     </h3>
                   </div>
+                  <p className="text-sm text-gray-500">
+                    {chat[1].userInfo?.lastMessage?.text}
+                  </p>
                 </div>
               </div>
             </li>
