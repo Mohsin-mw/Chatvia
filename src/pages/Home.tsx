@@ -20,7 +20,6 @@ const navigation = [
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
 
   return (
     <>
