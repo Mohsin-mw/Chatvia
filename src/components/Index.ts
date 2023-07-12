@@ -8,3 +8,5 @@ export { default as SignInFormHelpers } from "./SignInFormHelpers";
 export { default as TextLink } from "./TextLink";
 export { default as Label } from "./Label";
 export { default as FormHeader } from "./FormHeader";
+export { default as LoginPageImage } from "./LoginPageImage";
+export { default as LoginFormContainer } from "./LoginFormContainer";

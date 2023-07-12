@@ -2,14 +2,14 @@ import { AiFillHeart } from "react-icons/ai";
 
 const DeveloperSlogan = () => {
   return (
-    <div className="">
-      Developer by{" "}
+    <div className="flex flex-row items-center justify-center m-4">
+      Developer by
       <a
         href="https://github.com/Mohsin-mw"
         target="_blank"
         className="font-bold cursor-pointer underline  underline-offset-4"
       >
-        MMW
+        <span className="mx-1">MMW</span>
       </a>{" "}
       With
       <span>
