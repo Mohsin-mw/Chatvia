@@ -1,16 +1,18 @@
 import { AiFillHeart } from "react-icons/ai";
+import { FiExternalLink } from "react-icons/fi";
 
 const DeveloperSlogan = () => {
   return (
-    <div className="flex flex-row items-center justify-center m-4">
+    <div className="flex flex-row items-center justify-start my-4 text-sm">
       Developer by
       <a
         href="https://github.com/Mohsin-mw"
         target="_blank"
-        className="font-bold cursor-pointer underline  underline-offset-4"
+        className="font-bold cursor-pointer flex flex-row-reverse  items-center justify-center mx-1 "
       >
-        <span className="mx-1">MMW</span>
-      </a>{" "}
+        <FiExternalLink />
+        <span className="">MMW</span>
+      </a>
       With
       <span>
         <AiFillHeart

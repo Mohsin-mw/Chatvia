@@ -1,5 +1,5 @@
 import { LoginFormProps } from "../common";
-import { FormInput, SignInFormHelpers } from "../components/index";
+import { FormInput, SignInFormHelpers } from "../components/Index";
 import PrimaryButton from "./PrimaryButton";
 
 const LoginForm = ({
@@ -13,7 +13,7 @@ const LoginForm = ({
     <form
       action="#"
       method="POST"
-      className="space-y-6 mt-6"
+      className="space-y-4 mt-10 mb-1"
       onSubmit={(event) => submitHandler(event)}
     >
       <FormInput

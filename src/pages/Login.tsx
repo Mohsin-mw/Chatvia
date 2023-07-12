@@ -9,7 +9,7 @@ import {
   LoginForm,
   LoginPageImage,
   LogoWithText,
-} from "../components";
+} from "../components/Index";
 import { FirebaseError } from "firebase/app";
 
 const Login = () => {

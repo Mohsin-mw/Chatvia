@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+// TODO: Clean Signup
+
 import useSignup from "../hooks/useSignUp";
 const Signup = () => {
   const [username, setUsername] = useState("");

@@ -1,8 +1,8 @@
-import { CheckBox, Label, TextLink } from "./Index";
+import { CheckBox, Label, TextLink } from "./index";
 
 const SignInFormHelpers = () => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between ">
       <div className="flex items-center">
         <CheckBox />
         <Label text="Remember me" />

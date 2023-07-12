@@ -16,7 +16,7 @@ export interface User {
 export interface NavigationItem {
   name: string;
   href: string;
-  icon: React.ComponentType<any>; // Replace `any` with appropriate props type for the icon component
+  icon: React.ComponentType<any>;
 }
 
 export interface NavigationProps {
@@ -57,6 +57,7 @@ export type TextLinkProps = {
   text: string;
   isUnderlined: boolean;
   to: string;
+  children?: Children;
 };
 
 export type LabelProps = {
