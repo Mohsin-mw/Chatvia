@@ -9,10 +9,10 @@ import Dashboard from "../pages/Dashboard";
 import ViewProfile from "../pages/ViewProfile";
 import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
-import SettingsDashboard from "../components/SettingsDashboard";
-import LogOut from "../components/LogOut";
+import SettingsDashboard from "../pages/SettingsDashboard";
+import LogOut from "../pages/LogOut";
 import DashboardHome from "../pages/DashboardHome";
-import MessagesDashboard from "../components/MessagesDashboard";
+import MessagesDashboard from "../pages/MessagesDashboard";
 
 const routes = createBrowserRouter([
   {

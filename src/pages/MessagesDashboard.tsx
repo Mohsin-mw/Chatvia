@@ -1,6 +1,6 @@
-import ChatUserBanner from "./ChatUserBanner";
-import MessageScreen from "./MessageScreen";
-import SendMessage from "./SendMessage";
+import ChatUserBanner from "../components/ChatUserBanner";
+import MessageScreen from "../components/MessageScreen";
+import SendMessage from "../components/SendMessage";
 
 const MessagesDashboard = () => {
   return (
