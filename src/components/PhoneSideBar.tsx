@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { NavigationProps } from "../common";
+import { PhoneSidebarProps } from "../common";
 
 const PhoneSideBar = ({
   user,
@@ -10,7 +10,7 @@ const PhoneSideBar = ({
   mobileMenuOpen,
   setMobileMenuOpen,
   navigation,
-}: NavigationProps) => {
+}: PhoneSidebarProps) => {
   return (
     <Transition.Root show={mobileMenuOpen} as={Fragment}>
       <Dialog

@@ -14,16 +14,20 @@ const navigation = [
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
-
+  const { currentUser } = useContext(AuthContext) || {};
+  const user = currentUser || {
+    displayName: "",
+    email: "",
+    photoURL: "",
+    description: "",
+  };
   return (
     <>
       <div className="flex h-full">
         <PhoneSideBar
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
-          user={currentUser}
+          user={user}
           navigation={navigation}
           logo={logo}
         />

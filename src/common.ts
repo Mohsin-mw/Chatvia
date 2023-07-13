@@ -5,14 +5,6 @@ export interface Message {
   number: number;
 }
 
-export interface User {
-  uid: string;
-  displayName: string | null;
-  email: string | null;
-  photoURL: string | null;
-  description: string | null;
-}
-
 export interface NavigationItem {
   name: string;
   href: string;
@@ -27,7 +19,23 @@ export interface NavigationProps {
   setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export type User = {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+  description: string;
+};
+
 export type Children = React.ReactNode;
+
+export type PhoneSidebarProps = {
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+  user: User;
+  navigation: NavigationItem[];
+  logo: string;
+};
 
 export type LoginFormProps = {
   submitHandler: (event: React.FormEvent<HTMLFormElement>) => void;
