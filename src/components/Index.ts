@@ -13,3 +13,4 @@ export { default as LoginFormContainer } from "./LoginFormContainer";
 export { default as PlaceholderUserImage } from "./PlaceholderUserImage";
 export { default as ImageSelector } from "./ImageSelector";
 export { default as InputFile } from "./InputFile";
+export { default as FeedChatButton } from "./FeedChatButton";

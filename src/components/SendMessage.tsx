@@ -46,7 +46,7 @@ const SendMessage = () => {
       />
       <button
         type="submit"
-        className="btn btn-square mx-2 bg-primary-shade-2"
+        className="btn btn-square mx-2 bg-primary"
         disabled={text ? false : true}
       >
         <PaperAirplaneIcon className="h-6 w-6 text-neutral-50" />

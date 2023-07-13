@@ -62,6 +62,7 @@ export default function ViewProfile() {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -121,7 +122,6 @@ export default function ViewProfile() {
                         <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                           <button
                             onClick={handleMessage}
-                            // to={`/chat/${user?.uid}`}
                             type="button"
                             className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-neutral duration-200"
                           >
