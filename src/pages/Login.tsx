@@ -5,12 +5,15 @@ import { useLoading } from "../context/LoadierContext";
 import { toast } from "react-toastify";
 import {
   DeveloperSlogan,
+  Form,
   FormHeader,
-  LoginForm,
+  FormInput,
   LoginPageImage,
-  LogoWithText,
+  Logo,
+  SignInFormHelpers,
 } from "../components/Index";
 import { FirebaseError } from "firebase/app";
+import PrimaryButton from "../components/PrimaryButton";
 
 const Login = () => {
   const { setLoading } = useLoading();
@@ -38,20 +41,33 @@ const Login = () => {
       <div className="flex min-h-full w-full">
         <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
-            <LogoWithText />
+            <Logo />
             <FormHeader
               headline="Log in to your account"
               text="create a brand new account today"
               isUnderlined={true}
               to="/signup"
             />
-            <LoginForm
-              email={email}
-              setEmail={setEmail}
-              password={password}
-              setPassword={setPassword}
-              submitHandler={submitHandler}
-            />
+            <Form submitHandler={submitHandler}>
+              <FormInput
+                labelName="Email Address"
+                id="email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <FormInput
+                labelName="Password"
+                id="password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <SignInFormHelpers />
+              <PrimaryButton type="submit">Sign In</PrimaryButton>
+            </Form>
             <DeveloperSlogan />
           </div>
         </div>

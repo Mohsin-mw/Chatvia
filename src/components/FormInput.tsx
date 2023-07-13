@@ -1,5 +1,5 @@
 import { FormInputProps } from "../common";
-import { Input, Label } from "./Index";
+import { InputText, Label } from "./Index";
 
 const FormInput = ({
   labelName,
@@ -13,7 +13,7 @@ const FormInput = ({
     <div>
       <Label text={labelName} />
       <div className="mt-1">
-        <Input
+        <InputText
           id={id}
           name={name}
           type={type}

@@ -30,18 +30,16 @@ export interface NavigationProps {
 export type Children = React.ReactNode;
 
 export type LoginFormProps = {
-  email: string;
-  setEmail: (email: string) => void;
-  password: string;
-  setPassword: (password: string) => void;
   submitHandler: (event: React.FormEvent<HTMLFormElement>) => void;
-};
-
-export type PrimaryButtonProps = {
   children: Children;
 };
 
-export type InputProps = {
+export type PrimaryButtonProps = {
+  type?: "button" | "submit" | "reset";
+  children: Children;
+};
+
+export type InputTextProps = {
   id: string;
   name: string;
   type: string;
@@ -49,7 +47,13 @@ export type InputProps = {
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export type FormInputProps = InputProps & {
+export type InputFileProps = {
+  id: string;
+  name: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+};
+
+export type FormInputProps = InputTextProps & {
   labelName: string;
 };
 

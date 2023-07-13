@@ -1,6 +1,6 @@
-import { InputProps } from "../common";
+import { InputTextProps } from "../common";
 
-const Input = ({ id, name, type, value, onChange }: InputProps) => {
+const InputText = ({ id, name, type, value, onChange }: InputTextProps) => {
   return (
     <input
       id={id}
@@ -14,4 +14,4 @@ const Input = ({ id, name, type, value, onChange }: InputProps) => {
   );
 };
 
-export default Input;
+export default InputText;
