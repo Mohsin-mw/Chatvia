@@ -20,3 +20,5 @@ export { default as PhonoSideBarUserAccountContainer } from "./PhonoSideBarUserA
 export { default as SideBarLinkContainer } from "./SideBarLinkContainer";
 export { default as UserAccountAvatar } from "./UserAccoutAvatar";
 export { default as AvatarsCarousel } from "./AvatarsCarousel";
+export { default as CoverImage } from "./CoverImage.tsx";
+export { default as IconButton } from "./IconButton.tsx";

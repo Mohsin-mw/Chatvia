@@ -11,6 +11,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { v4 as uuid } from "uuid";
+import IconButton from "./IconButton";
+
 const SendMessage = () => {
   const [text, setText] = useState("");
   const { data } = useContext(ChatContext);
@@ -44,13 +46,9 @@ const SendMessage = () => {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button
-        type="submit"
-        className="btn btn-square mx-2 bg-primary"
-        disabled={text ? false : true}
-      >
+      <IconButton disabled={text ? false : true}>
         <PaperAirplaneIcon className="h-6 w-6 text-neutral-50" />
-      </button>
+      </IconButton>
     </form>
   );
 };

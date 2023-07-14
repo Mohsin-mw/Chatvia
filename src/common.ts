@@ -113,3 +113,19 @@ export type UserAccountAvatarProps = {
 export type SideChatFeedProps = {
   users: User[];
 };
+
+export type LinkButtonProps = {
+  to: string;
+  children: React.ReactNode;
+};
+export type DateObject = {
+  seconds: number;
+  nanoseconds: number;
+};
+
+export type UserMessage = {
+  date: DateObject;
+  id: string;
+  senderId: string;
+  text: string;
+};
