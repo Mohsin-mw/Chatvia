@@ -2,8 +2,6 @@ import { PersonalInformationProps } from "../common";
 import { ProfileInput } from "./Index";
 
 const PersonalInformation = ({ email, setEmail }: PersonalInformationProps) => {
-  console.log(email);
-
   return (
     <div className="grid grid-cols-1 gap-y-6 pt-8 sm:grid-cols-6 sm:gap-x-6">
       <div className="sm:col-span-6">

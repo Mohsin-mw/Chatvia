@@ -10,16 +10,15 @@ const SettingsDashboard = () => {
   const { setLoading } = useLoading();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const { currentUser } = useContext(AuthContext);
 
   const setValues = () => {
-    setLoading(true);
-    setName(currentUser.displayName);
-    setEmail(currentUser.email);
-    setDescription(currentUser.description);
-    setImage(currentUser.photoURL);
-    setLoading(false);
+    setName(currentUser.displayName || "");
+    setEmail(currentUser.email || "");
+    setDescription(currentUser.description || "");
+    setImage(currentUser.photoURL || "");
   };
 
   const saveChanges = async (e) => {
@@ -38,6 +37,7 @@ const SettingsDashboard = () => {
         <h1 className="text-3xl font-bold tracking-tight text-blue-gray-900">
           Account
         </h1>
+
         <form className="divide-y-blue-gray-200 mt-6 space-y-8 divide-y">
           <ProfileInformation
             name={name}

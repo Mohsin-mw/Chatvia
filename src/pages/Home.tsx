@@ -14,6 +14,7 @@ const navigation = [
 
 const Home = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const { currentUser } = useContext(AuthContext) || {};
   const user = currentUser || {
     displayName: "",

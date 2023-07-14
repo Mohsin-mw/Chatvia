@@ -24,8 +24,8 @@ const SideChatFeed = ({ users }: SideChatFeedProps) => {
   }, [users]);
 
   return (
-    <aside className="hidden lg:order-first lg:block lg:flex-shrink-0">
-      <div className="relative flex h-full w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white">
+    <aside className="md:order-first lg:order-first lg:block lg:flex-shrink-0">
+      <div className="relative flex h-full w-full  md:w-96 flex-col overflow-y-auto border-r border-gray-200 bg-white">
         <div className="flex flex-col space-y-5 pt-5 px-5">
           <div className="text-sm">Users</div>
           <Searchbar filterSearch={filterSearch} />

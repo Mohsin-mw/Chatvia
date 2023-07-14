@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage";
 import SettingsDashboard from "../pages/SettingsDashboard";
 import DashboardHome from "../pages/DashboardHome";
 import MessagesDashboard from "../pages/MessagesDashboard";
+import ChatPage from "../pages/ChatPage";
 
 const routes = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const routes = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/messages/:id",
+    element: <ChatPage />,
   },
   {
     path: "/profile",
