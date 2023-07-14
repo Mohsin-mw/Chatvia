@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import { User } from "../common";
 
-interface Props {
-  user: User;
-}
-
-const Avatar = ({ user }: Props) => {
+const Avatar = ({ user }: { user: User }) => {
   return (
     <Link
       to={`/viewprofile/${user.uid}`}

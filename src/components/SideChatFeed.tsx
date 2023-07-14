@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { User } from "../common";
-import Avatar from "./Avatars";
+import { SideChatFeedProps, User } from "../common";
 import Feeds from "./Feeds";
 import Searchbar from "./Searchbar";
+import AvatarsCarousel from "./AvatarsCarousel";
 
-const SideChatFeed = ({ users }: { users: User[] }) => {
-  const [people, setPeople] = useState([]);
-  const filterSearch = (text) => {
+const SideChatFeed = ({ users }: SideChatFeedProps) => {
+  const [people, setPeople] = useState<User[]>([]);
+  const filterSearch = (text: string) => {
     if (text === "") {
       setPeople(users);
     } else {
@@ -30,13 +30,7 @@ const SideChatFeed = ({ users }: { users: User[] }) => {
           <div className="text-sm">Users</div>
           <Searchbar filterSearch={filterSearch} />
           <div className="flex flex-row justify-around">
-            <div className="flex flex-row overflow-hidden">
-              {people.map((user) => (
-                <div key={user.uid} className="carousel-item px-2">
-                  <Avatar user={user} />
-                </div>
-              ))}
-            </div>
+            <AvatarsCarousel people={people} />
           </div>
           <div className="flex flex-col items-start justify-start">
             <div className="my-3 text-sm">Recent</div>

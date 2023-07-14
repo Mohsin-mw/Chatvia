@@ -19,3 +19,4 @@ export { default as PhoneSideBarLinksContainer } from "./PhoneSideBarLinksContai
 export { default as PhonoSideBarUserAccountContainer } from "./PhonoSideBarUserAccountContainer";
 export { default as SideBarLinkContainer } from "./SideBarLinkContainer";
 export { default as UserAccountAvatar } from "./UserAccoutAvatar";
+export { default as AvatarsCarousel } from "./AvatarsCarousel";

@@ -109,3 +109,7 @@ export type SideBarProps = {
 export type UserAccountAvatarProps = {
   user: User;
 };
+
+export type SideChatFeedProps = {
+  users: User[];
+};
