@@ -15,8 +15,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { User } from "../common";
 import { db } from "../services/firebase";
 import { AuthContext } from "../context/AuthContext";
+import ChatUserBanner from "../components/ChatUserBanner";
+import LinkButton from "../components/LinkButton";
+import { useLoading } from "../context/LoadierContext";
 
 export default function ViewProfile() {
+  const { setLoading } = useLoading();
   const { currentUser } = useContext(AuthContext);
   const [user, setUser] = useState<User>();
   const { id } = useParams();
@@ -28,16 +32,18 @@ export default function ViewProfile() {
   };
 
   const getUser = async () => {
+    setLoading(true);
     const citiesRef = collection(db, "users");
-
     const q = query(citiesRef, where("uid", "==", id));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       setUser(doc.data());
     });
+    setLoading(false);
   };
 
   const handleMessage = async () => {
+    setLoading(true);
     const combinedId =
       currentUser.uid > user?.uid
         ? currentUser.uid + user?.uid
@@ -48,7 +54,7 @@ export default function ViewProfile() {
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
-            uid: user.uid,
+            uid: user?.uid,
             displayName: user?.displayName,
             photoURL: user?.photoURL,
           },
@@ -62,11 +68,12 @@ export default function ViewProfile() {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        navigate("/");
       }
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
+    navigate("/");
   };
 
   useEffect(() => {
@@ -96,60 +103,22 @@ export default function ViewProfile() {
               </nav>
 
               <article>
-                <div>
-                  <div>
-                    <img
-                      className="h-32 w-full object-cover lg:h-48"
-                      src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                    <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-                      <div className="flex">
-                        <img
-                          className="h-24 w-24 rounded-full ring-4 ring-primary-shade-2 sm:h-32 sm:w-32 object-cover"
-                          src={user?.photoURL}
-                          alt=""
-                        />
+                {user && (
+                  <ChatUserBanner
+                    user={user}
+                    Button={
+                      <div onClick={handleMessage}>
+                        <LinkButton onclick={handleMessage}>
+                          <EnvelopeIcon
+                            className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          <span>Message</span>
+                        </LinkButton>
                       </div>
-                      <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-                        <div className="mt-6 min-w-0 flex-1 sm:hidden 2xl:block">
-                          <h1 className="truncate text-2xl font-bold text-gray-900">
-                            {user?.displayName}
-                          </h1>
-                        </div>
-                        <div className="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-                          <button
-                            onClick={handleMessage}
-                            type="button"
-                            className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-neutral duration-200"
-                          >
-                            <EnvelopeIcon
-                              className="-ml-1 mr-2 h-5 w-5 text-gray-400"
-                              aria-hidden="true"
-                            />
-                            <span>Message</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-6 hidden min-w-0 flex-1 sm:block 2xl:hidden">
-                      <h1 className="truncate text-2xl font-bold text-gray-900">
-                        {user?.displayName}
-                      </h1>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tabs */}
-                <div className="mt-6 sm:mt-2 2xl:mt-5">
-                  <div className="border-b border-gray-200">
-                    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8"></div>
-                  </div>
-                </div>
-
-                {/* Description list */}
+                    }
+                  />
+                )}
                 <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
                   <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                     <div className="sm:col-span-1">

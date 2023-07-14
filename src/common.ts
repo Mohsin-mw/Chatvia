@@ -115,7 +115,7 @@ export type SideChatFeedProps = {
 };
 
 export type LinkButtonProps = {
-  to: string;
+  onclick: () => void;
   children: React.ReactNode;
 };
 export type DateObject = {
