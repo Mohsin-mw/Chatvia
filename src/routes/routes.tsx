@@ -7,10 +7,8 @@ import Unauthorize from "../components/Unauthorize";
 import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
 import ViewProfile from "../pages/ViewProfile";
-import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
 import SettingsDashboard from "../pages/SettingsDashboard";
-import LogOut from "../pages/LogOut";
 import DashboardHome from "../pages/DashboardHome";
 import MessagesDashboard from "../pages/MessagesDashboard";
 
@@ -70,15 +68,7 @@ const routes = createBrowserRouter([
             path: "settings",
             element: <SettingsDashboard />,
           },
-          {
-            path: "logout",
-            element: <LogOut />,
-          },
         ],
-      },
-      {
-        path: "/users",
-        element: <Users />,
       },
     ],
   },

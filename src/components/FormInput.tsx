@@ -11,7 +11,7 @@ const FormInput = ({
 }: FormInputProps) => {
   return (
     <div>
-      <Label text={labelName} />
+      {labelName && <Label text={labelName} />}
       <div className="mt-1">
         <InputText
           id={id}

@@ -1,5 +1,4 @@
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
-import SettingsSubNavigation from "../components/SettingsSubNavigation";
 import { Outlet, useNavigate } from "react-router-dom";
 export default function Profile() {
   const navigate = useNavigate();
@@ -28,7 +27,6 @@ export default function Profile() {
         </div>
       </nav>
       <div className="flex flex-1 xl:overflow-hidden">
-        <SettingsSubNavigation />
         <Outlet />
       </div>
     </div>

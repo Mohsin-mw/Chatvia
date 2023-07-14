@@ -62,7 +62,7 @@ export type InputFileProps = {
 };
 
 export type FormInputProps = InputTextProps & {
-  labelName: string;
+  labelName?: string;
 };
 
 export type TextLinkProps = {
@@ -129,3 +129,30 @@ export type UserMessage = {
   senderId: string;
   text: string;
 };
+
+export type SettingItem = {
+  name: string,
+  description:
+   string,
+  href: string,
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
+  current: boolean,
+},
+
+export type SettingsLinkButtonProps = {
+  item: SettingItem,
+  selectedItem: string,
+  onClick: () => void
+}
+
+export type PersonalInformationProps = {
+  email: string,
+  setEmail: (e:React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export type ProfileInformationProps = {
+  name: string,
+  setName: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  image: string,
+  setImage: (e:React.ChangeEvent<HTMLInputElement>) => void;
+}

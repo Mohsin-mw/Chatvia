@@ -22,3 +22,7 @@ export { default as UserAccountAvatar } from "./UserAccoutAvatar";
 export { default as AvatarsCarousel } from "./AvatarsCarousel";
 export { default as CoverImage } from "./CoverImage.tsx";
 export { default as IconButton } from "./IconButton.tsx";
+export { default as SettingsLinkButton } from "./SettingsLinkButton.tsx";
+export { default as ProfileInput } from "./ProfileInput.tsx";
+export { default as PersonalInformation } from "./PersonalInformation.tsx";
+export { default as ProfileInformation } from "./ProfileInformation.tsx";
