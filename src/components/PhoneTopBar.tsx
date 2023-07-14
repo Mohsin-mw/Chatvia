@@ -1,4 +1,5 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { Logo } from "./Index";
 
 interface Props {
   setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +11,7 @@ const PhoneTopBar = ({ setMobileMenuOpen, logo }: Props) => {
     <div className="lg:hidden">
       <div className="flex items-center justify-between bg-indigo-600 py-2 px-4 sm:px-6 lg:px-8">
         <div>
-          <img className="h-8 w-auto" src={logo} alt="Your Company" />
+          <Logo />
         </div>
         <div>
           <button
