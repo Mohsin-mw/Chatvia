@@ -83,3 +83,21 @@ export type FormHeaderProps = TextLinkProps & {
 export type LoadingProviderProps = {
   children: Children;
 };
+
+export type CloseButtonProps = {
+  onClick: () => void;
+};
+
+export type navigationLinkItem = {
+  name: string;
+  href: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+export type SideBarLinksContainerProps = {
+  navigation: navigationLinkItem[];
+};
+
+export type PhonoSideBarUserAccountContainerProps = {
+  user: User;
+};

@@ -14,3 +14,6 @@ export { default as PlaceholderUserImage } from "./PlaceholderUserImage";
 export { default as ImageSelector } from "./ImageSelector";
 export { default as InputFile } from "./InputFile";
 export { default as FeedChatButton } from "./FeedChatButton";
+export { default as CloseButton } from "./CloseButton";
+export { default as SideBarLinksContainer } from "./SideBarLinksContainer";
+export { default as PhonoSideBarUserAccountContainer } from "./PhonoSideBarUserAccountContainer";

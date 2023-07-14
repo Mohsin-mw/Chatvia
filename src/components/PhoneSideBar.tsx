@@ -1,8 +1,11 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
 import { PhoneSidebarProps } from "../common";
+import {
+  CloseButton,
+  SideBarLinksContainer,
+  PhonoSideBarUserAccountContainer,
+} from "../components/Index";
 
 const PhoneSideBar = ({
   user,
@@ -51,64 +54,20 @@ const PhoneSideBar = ({
                 leaveTo="opacity-0"
               >
                 <div className="absolute top-0 right-0 -mr-12 pt-4">
-                  <button
-                    type="button"
-                    className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  <CloseButton
                     onClick={() =>
                       setMobileMenuOpen && setMobileMenuOpen(false)
                     }
-                  >
-                    <span className="sr-only">Close sidebar</span>
-                    <XMarkIcon
-                      className="h-6 w-6 text-white"
-                      aria-hidden="true"
-                    />
-                  </button>
+                  />
                 </div>
               </Transition.Child>
               <div className="pt-5 pb-4">
                 <div className="flex flex-shrink-0 items-center px-4">
                   <img className="h-8 w-auto" src={logo} alt="Your Company" />
                 </div>
-                <nav aria-label="Sidebar" className="mt-5">
-                  <div className="space-y-1 px-2">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className="group flex items-center rounded-md p-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                      >
-                        <item.icon
-                          className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </nav>
+                <SideBarLinksContainer navigation={navigation} />
               </div>
-              <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                <Link to="/profile" className="group block flex-shrink-0">
-                  <div className="flex items-center">
-                    <div>
-                      <img
-                        className="inline-block h-10 w-10 rounded-full border "
-                        src={user.photoURL}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {user.displayName}
-                      </p>
-                      <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                        Account Settings
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              <PhonoSideBarUserAccountContainer user={user} />
             </Dialog.Panel>
           </Transition.Child>
           <div className="w-14 flex-shrink-0" aria-hidden="true"></div>

@@ -22,22 +22,20 @@ const Home = () => {
     description: "",
   };
   return (
-    <>
-      <div className="flex h-full">
-        <PhoneSideBar
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          user={user}
-          navigation={navigation}
-          logo={logo}
-        />
-        <Sidebar user={currentUser} navigation={navigation} />
-        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-          <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} logo={logo} />
-          <Outlet />
-        </div>
+    <div className="flex h-full">
+      <PhoneSideBar
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        user={user}
+        navigation={navigation}
+        logo={logo}
+      />
+      <Sidebar user={currentUser} navigation={navigation} />
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <PhoneTopBar setMobileMenuOpen={setMobileMenuOpen} logo={logo} />
+        <Outlet />
       </div>
-    </>
+    </div>
   );
 };
 
