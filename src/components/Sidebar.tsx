@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { NavigationProps } from "../common";
+import { SideBarLinkContainer, UserAccountAvatar } from "../components/Index";
 
 const Sidebar = ({ user, navigation }: NavigationProps) => {
   return (
@@ -11,38 +11,9 @@ const Sidebar = ({ user, navigation }: NavigationProps) => {
             <div className="flex items-center justify-center bg-indigo-600 py-4">
               <img className="h-8 w-auto" src={logo} alt="Your Company" />
             </div>
-            <nav
-              aria-label="Sidebar"
-              className="flex flex-col items-center space-y-3 py-6"
-            >
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="flex items-center rounded-lg p-4 text-indigo-200 hover:bg-dark duration-200 group"
-                >
-                  <item.icon
-                    className="h-6 w-6  group-hover:text-primary-shade-2 duration-200"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">{item.name}</span>
-                </Link>
-              ))}
-            </nav>
+            <SideBarLinkContainer navigation={navigation} />
           </div>
-          <div className="flex flex-shrink-0 pb-5 ">
-            <Link to="/profile" className="w-full flex-shrink-0">
-              <img
-                className="mx-auto block h-10 w-10 rounded-full shadow-sm object-cover"
-                src={user?.photoURL}
-                alt=""
-              />
-              <div className="sr-only">
-                <p>{user?.displayName}</p>
-                <p>Account settings</p>
-              </div>
-            </Link>
-          </div>
+          <UserAccountAvatar user={user} />
         </div>
       </div>
     </div>

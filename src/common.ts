@@ -88,16 +88,24 @@ export type CloseButtonProps = {
   onClick: () => void;
 };
 
-export type navigationLinkItem = {
+export type NavigationLinkItemProps = {
   name: string;
   href: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-export type SideBarLinksContainerProps = {
-  navigation: navigationLinkItem[];
+export type PhoneSideBarLinksContainerProps = {
+  navigation: NavigationLinkItemProps[];
 };
 
 export type PhonoSideBarUserAccountContainerProps = {
+  user: User;
+};
+
+export type SideBarProps = {
+  navigation: NavigationLinkItemProps[];
+};
+
+export type UserAccountAvatarProps = {
   user: User;
 };

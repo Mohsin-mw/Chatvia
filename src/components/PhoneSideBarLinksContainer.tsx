@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { SideBarLinksContainerProps } from "../common";
+import { PhoneSideBarLinksContainerProps } from "../common";
 
-const SideBarLinksContainer = ({ navigation }: SideBarLinksContainerProps) => {
+const PhoneSideBarLinksContainer = ({
+  navigation,
+}: PhoneSideBarLinksContainerProps) => {
   return (
     <nav aria-label="Sidebar" className="mt-5">
       <div className="space-y-1 px-2">
@@ -23,4 +25,4 @@ const SideBarLinksContainer = ({ navigation }: SideBarLinksContainerProps) => {
   );
 };
 
-export default SideBarLinksContainer;
+export default PhoneSideBarLinksContainer;

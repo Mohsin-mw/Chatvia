@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PhoneSidebarProps } from "../common";
 import {
   CloseButton,
-  SideBarLinksContainer,
+  PhoneSideBarLinksContainer,
   PhonoSideBarUserAccountContainer,
 } from "../components/Index";
 
@@ -65,7 +65,7 @@ const PhoneSideBar = ({
                 <div className="flex flex-shrink-0 items-center px-4">
                   <img className="h-8 w-auto" src={logo} alt="Your Company" />
                 </div>
-                <SideBarLinksContainer navigation={navigation} />
+                <PhoneSideBarLinksContainer navigation={navigation} />
               </div>
               <PhonoSideBarUserAccountContainer user={user} />
             </Dialog.Panel>
