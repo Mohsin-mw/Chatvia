@@ -71,11 +71,11 @@ const routes = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/messages/:id",
+        element: <ChatPage />,
+      },
     ],
-  },
-  {
-    path: "/messages/:id",
-    element: <ChatPage />,
   },
   {
     path: "/profile",

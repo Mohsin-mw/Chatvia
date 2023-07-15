@@ -17,7 +17,7 @@ const MessagesDashboard = () => {
   return (
     <section
       aria-labelledby="primary-heading"
-      className="hidden sm:flex h-full min-w-0 flex-1 flex-col overflow-y-auto"
+      className="sm:flex h-full min-w-0 flex-1 flex-col overflow-y-auto"
     >
       <ChatUserBanner
         user={data.user}

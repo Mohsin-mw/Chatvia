@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const FeedChatButton = ({ chat, currentBox }) => {
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
   const userChat = chat[1];
   const milliseconds =
     userChat.date?.seconds * 1000 + userChat.date?.nanoseconds / 1000000;
@@ -12,8 +14,19 @@ const FeedChatButton = ({ chat, currentBox }) => {
     ? date.toLocaleTimeString()
     : date.toLocaleDateString();
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallDevice(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <Link to={`/chat/${chat[0]}`}>
+    <Link to={`/${isSmallDevice ? "messages" : "chat"}/${chat[0]}`}>
       <li
         className={` my-2 py-4 px-3 rounded-md hover:bg-neutral duration-200 cursor-pointer ${
           chat[1].userInfo.uid == currentBox ? "bg-neutral" : ""
