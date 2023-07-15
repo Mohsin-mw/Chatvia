@@ -152,7 +152,11 @@ export type PersonalInformationProps = {
 
 export type ProfileInformationProps = {
   name: string,
-  setName: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  setName:  (name: string) => void;
   image: string,
-  setImage: (e:React.ChangeEvent<HTMLInputElement>) => void;
+  setImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export type ProfileInputProps = FormInputProps & {
+  disabled?:boolean
 }

@@ -15,6 +15,7 @@ const PersonalInformation = ({ email, setEmail }: PersonalInformationProps) => {
         name="phone-number"
         id="phone-number"
         value={email}
+        disabled={true}
         onChange={setEmail}
       />
 

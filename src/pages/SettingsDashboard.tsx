@@ -5,30 +5,57 @@ import Logout from "./LogOut";
 import PersonalInformation from "../components/PersonalInformation";
 import ProfileInformation from "../components/ProfileInformation";
 import { useLoading } from "../context/LoadierContext";
+import { db, storage } from "../services/firebase";
+import { updateProfile } from "firebase/auth";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { doc, updateDoc } from "firebase/firestore";
 
 const SettingsDashboard = () => {
   const { setLoading } = useLoading();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const { currentUser } = useContext(AuthContext);
 
   const setValues = () => {
     setName(currentUser.displayName || "");
     setEmail(currentUser.email || "");
-    setDescription(currentUser.description || "");
     setImage(currentUser.photoURL || "");
   };
 
   const saveChanges = async (e) => {
     e.preventDefault();
-  };
+    const storageRef = ref(storage, currentUser.uid);
+    const uploadTask = uploadBytes(storageRef, image);
+    setLoading(true);
 
-  useEffect(() => {
+    uploadTask
+      .then(async (snapshot) => {
+        return getDownloadURL(snapshot.ref);
+      })
+      .then(async (downloadURL) => {
+        await updateProfile(currentUser, {
+          displayName: name,
+          photoURL: downloadURL,
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+        setLoading(false);
+      });
+
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      displayName: name,
+    });
+
+    setLoading(false);
+  };
+  ~useEffect(() => {
     setLoading(true);
     setValues();
     setLoading(false);
+    console.log(currentUser);
   }, [currentUser, setLoading]);
 
   return (
@@ -43,7 +70,7 @@ const SettingsDashboard = () => {
             name={name}
             setName={setName}
             image={image}
-            setImage={(e) => setImage(e.target.value)}
+            setImage={setImage}
           />
 
           <PersonalInformation
