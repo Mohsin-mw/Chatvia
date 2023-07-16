@@ -29,7 +29,7 @@ Chatvia is a dynamic and intuitive messaging website designed to provide users w
 
 
 ### Built With
-[![My Skills](https://skillicons.dev/icons?i=react,tailwind,ts)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,tailwind,ts,firebase)](https://skillicons.dev)
 
 
 
