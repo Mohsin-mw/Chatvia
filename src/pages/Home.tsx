@@ -23,7 +23,7 @@ const Home = () => {
     description: "",
   };
   return (
-    <div className="flex h-full">
+    <div className="flex h-full ">
       <PhoneSideBar
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
